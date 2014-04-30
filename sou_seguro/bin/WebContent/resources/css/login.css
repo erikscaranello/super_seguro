@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+body {
+	background: #F9F9F9;
+	color: #006C26;
+}
+
+figure {
+	width: 22.88726207906296%;
+	margin: 10.78645833333333% auto 0 auto;
+}
+
+.quadrado_verde {
+	width: 18.88726207906296%;
+	margin: 2.78645833333333% auto 0 auto;
+}
+
+.esqueceu-senha {
+	margin-top: 6%;
+	text-align: right;
+}
+
+.chamada-clique-aqui {
+	margin: 0;	
+}
+
+.clique-aqui {
+	font-size: 0.75em;
+	cursor:pointer;
+}
