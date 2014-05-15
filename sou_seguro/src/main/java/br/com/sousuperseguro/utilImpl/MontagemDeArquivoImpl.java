@@ -172,7 +172,19 @@ public class MontagemDeArquivoImpl implements MontagemDeArquivo {
 					+ acertoDeCamposFor(recebido.getIdCidadeRes().toString(), 7);
 
 			stringRetornoArquivo = stringRetornoArquivo + recebido.getUfRes();
-			stringRetornoArquivo = stringRetornoArquivo + recebido.getCepRes();
+			
+			if(recebido.getCepRes().length() < 8) {
+				int subtracao = 8 - recebido.getCepRes().length();
+				String cepCorreto = recebido.getCepRes();
+				for(int j = 0; j < subtracao; j++) {
+					cepCorreto = "0" + cepCorreto;
+				}
+				
+				stringRetornoArquivo = stringRetornoArquivo + cepCorreto;
+			
+			} else {
+				stringRetornoArquivo = stringRetornoArquivo + recebido.getCepRes();
+			}
 
 			stringRetornoArquivo = stringRetornoArquivo
 					+ acertoDeCamposFor(recebido.getReferenciaRes() != null ? recebido.getReferenciaRes() : "", 30);
@@ -322,7 +334,20 @@ public class MontagemDeArquivoImpl implements MontagemDeArquivo {
 					+ acertoDeCamposFor(recebido.getRecebidoSouSuperSeguroCobranca().getIdCidadeCobr().toString(), 7);
 
 			stringRetornoArquivo = stringRetornoArquivo + recebido.getRecebidoSouSuperSeguroCobranca().getUfCobr();
-			stringRetornoArquivo = stringRetornoArquivo + recebido.getRecebidoSouSuperSeguroCobranca().getCepCobr();
+			
+			
+			if(recebido.getRecebidoSouSuperSeguroCobranca().getCepCobr().length() < 8) {
+				int subtracao = 8 - recebido.getRecebidoSouSuperSeguroCobranca().getCepCobr().length();
+				String cepCorreto = recebido.getRecebidoSouSuperSeguroCobranca().getCepCobr();
+				for(int j = 0; j < subtracao; j++) {
+					cepCorreto = "0" + cepCorreto;
+				}
+				
+				stringRetornoArquivo = stringRetornoArquivo + cepCorreto;
+			
+			} else {
+				stringRetornoArquivo = stringRetornoArquivo + recebido.getRecebidoSouSuperSeguroCobranca().getCepCobr();
+			}
 			
 			
 			
@@ -396,7 +421,13 @@ public class MontagemDeArquivoImpl implements MontagemDeArquivo {
 			
 			
 			String numeroBanco = (recebido.getRecebidoSouSuperSeguroPagamentoMensalidade().getNroBanco() != null ? String.valueOf(recebido.getRecebidoSouSuperSeguroPagamentoMensalidade().getNroBanco().getBanco()) : "   ");
-			stringRetornoArquivo = stringRetornoArquivo + numeroBanco;
+			if(numeroBanco.equals("1")) {
+				stringRetornoArquivo = stringRetornoArquivo + "00" + numeroBanco;
+			} else {
+				stringRetornoArquivo = stringRetornoArquivo + numeroBanco;
+			}
+			
+			
 			
 			String numeroAgencia = (recebido.getRecebidoSouSuperSeguroPagamentoMensalidade().getNroAgencia() != null ? acertoDeCamposForComZeros(recebido.getRecebidoSouSuperSeguroPagamentoMensalidade().getNroAgencia(), 4) : "    "); 
 			stringRetornoArquivo = stringRetornoArquivo + numeroAgencia;

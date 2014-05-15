@@ -8,4 +8,6 @@ public interface PropostaRepository {
 
 	void insert(Proposta propostaNova);
 
+	Proposta verificarPropostaPeloNome(String nomeCobranca);
+
 }

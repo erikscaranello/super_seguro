@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import br.com.sousuperseguro.entities.Proposta;
 import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroRecusada;
+import br.com.sousuperseguro.enums.Categoria;
 import br.com.sousuperseguro.repository.PropostaRepository;
 import br.com.sousuperseguro.repository.UploadDeArquivosRepository;
 import br.com.sousuperseguro.service.PropostaService;
@@ -66,24 +67,39 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 					
 					if(retorno != null) {
 						
-						Proposta proposta = propostaRepository.selecionarUltimo();
+						String numeroDaProposta = "";
 						BigInteger novoIdProposta;
 						
-						if(proposta == null) {
+						if(retorno.getcCategoria().name().equals("DEPENDENTES")) {
 							
+							Proposta proposta = propostaRepository.verificarPropostaPeloNome(retorno.getRecebidoSouSuperSeguroCobranca().getNmCobr());
+							retorno.setNroProposta(proposta.getPropostaPronta());
+							numeroDaProposta = proposta.getPropostaPronta();
+							
+							
+							// verificar esse trecho de código
 							novoIdProposta = new BigInteger("1");
 							
 						} else {
 							
-							novoIdProposta = proposta.getId().add(new BigInteger("1"));
+							Proposta proposta = propostaRepository.selecionarUltimo();
 							
+							if(proposta == null) {
+								
+								novoIdProposta = new BigInteger("1");
+								
+							} else {
+								novoIdProposta = proposta.getId().add(new BigInteger("1"));	
+							}
+							
+							numeroDaProposta = propostaService.calcularProposta(novoIdProposta);
+							retorno.setNroProposta(numeroDaProposta);
 						}
-						
-						String numeroDaProposta = propostaService.calcularProposta(novoIdProposta);
-						retorno.setNroProposta(numeroDaProposta);
 						
 						Proposta propostaNova = new Proposta();
 						propostaNova.setPropostaPronta(numeroDaProposta);
+						
+						
 						
 						try {
 

@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -30,6 +33,12 @@ public class FtpSuperSeguroImpl{
 	
 	@Scheduled(cron="00 08 * * * *")
 	public void executar() {
+		
+		Date d = new Date();  
+		Calendar calendario = new GregorianCalendar();  
+		calendario.setTime(d);
+		System.out.println("Iniciou execução recebimento de arquivo do cliente na data: " + calendario.getTime());
+		
 		
 		FTPClient ftp = new FTPClient();
 		

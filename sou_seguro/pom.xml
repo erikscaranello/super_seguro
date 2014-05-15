@@ -54,11 +54,6 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
-				<artifactId>log4j</artifactId>
-				<groupId>log4j</groupId>
-				<version>1.2.16</version>
-			</dependency>
-			<dependency>
 				<artifactId>dom4j</artifactId>
 				<groupId>dom4j</groupId>
 				<version>1.6.1</version>

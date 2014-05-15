@@ -1,4 +1,4 @@
-package br.com.sousuperseguro.crontab;
+package br.com.sousuperseguro.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,16 +13,17 @@ import java.util.List;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.sousuperseguro.entities.ArquivosEnvio;
 import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.service.ArquivosEnvioService;
 import br.com.sousuperseguro.util.MontagemDeArquivo;
 
-@Component
-public class FtpClienteImpl {
+@Controller
+public class VerificarImpl {
+	
 	
 	@Autowired
 	MontagemDeArquivo montagemDeArquivo;
@@ -30,8 +31,9 @@ public class FtpClienteImpl {
 	@Autowired
 	ArquivosEnvioService arquivosEnvioService;
 	
-	@Scheduled(cron="30 22 * * * *")
-	public void executar() {
+	
+	@RequestMapping("/testeEnvio")
+	public void verificar() {
 		
 		Date d = new Date();  
 		Calendar calendario = new GregorianCalendar();  
@@ -119,6 +121,8 @@ public class FtpClienteImpl {
     			e.printStackTrace();
     		}	
         }
+		
+		
 		
 	}
 	

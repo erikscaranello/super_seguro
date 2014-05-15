@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.sousuperseguro.connection.CriarConexao;
@@ -69,6 +70,29 @@ public class PropostaRepositoryImpl implements PropostaRepository{
     		session.close(); 
     	}
 		
+	}
+
+
+	@Override
+	public Proposta verificarPropostaPeloNome(String nomeCobranca) {
+		this.session = criarConexao.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Criteria criteria = this.session.createCriteria(Proposta.class);
+			
+			criteria.add(Restrictions.eq("", nomeCobranca));
+			criteria.setMaxResults(1);
+			Proposta proposta = (Proposta) criteria.uniqueResult();
+		
+			return proposta;
+		} catch (HibernateException e) {
+			tx.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 	}
 	
 }
