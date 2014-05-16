@@ -16,6 +16,8 @@ import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroCobrancaRecusada;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroPagamentoMensalidadeRecusada;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroRecusada;
+import br.com.sousuperseguro.enums.Categoria;
+import br.com.sousuperseguro.enums.TipoCobranca;
 import br.com.sousuperseguro.repository.UploadDeArquivosRepository;
 
 @Repository
@@ -230,6 +232,62 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
     	} finally {
     		session.close(); 
     	}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RecebidoSouSuperSeguro> obterDadosSemProposta() {
+		this.session = criarConexao.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Criteria criteria = this.session.createCriteria(RecebidoSouSuperSeguro.class); 
+			
+			
+			criteria.add(Restrictions.isNull("nroProposta"));
+			List<RecebidoSouSuperSeguro> retorno = criteria.list();
+			
+			tx.commit();	
+			return retorno;
+		
+		} catch (HibernateException e) {
+			tx.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RecebidoSouSuperSeguro> obterDadosNaoEnviadoCobrancaTitular() {
+		this.session = criarConexao.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Criteria criteria = this.session.createCriteria(RecebidoSouSuperSeguro.class); 
+			
+			
+			criteria.add(Restrictions.eq("envioEmail", false));
+			criteria.add(Restrictions.eq("cCategoria", Categoria.TITULAR));
+			
+			criteria.createAlias("recebidoSouSuperSeguroPagamentoMensalidade", "recebido");
+			
+			criteria.add(Restrictions.eq("recebido.tpCobr", TipoCobranca.BOLETOBANCARIO_BOLETOBANCARIO));
+			List<RecebidoSouSuperSeguro> retorno = criteria.list();
+			
+			tx.commit();	
+			return retorno;
+		
+		} catch (HibernateException e) {
+			tx.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 	}
 		
 }

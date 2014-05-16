@@ -38,6 +38,10 @@ public class UploadDeArquivosController {
 			List<FileItem> itens = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			uploadDeArquivosService.fazerUpload(itens);
 			
+			
+			
+			
+			
 		} catch (FileUploadException e) {
 			e.printStackTrace();
 		}

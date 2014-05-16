@@ -1,5 +1,7 @@
 package br.com.sousuperseguro.repository;
 
+import java.util.List;
+
 import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroCobrancaRecusada;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroPagamentoMensalidadeRecusada;
@@ -23,4 +25,8 @@ public interface UploadDeArquivosRepository {
 	RecebidoSouSuperSeguro obterRecebidoPorCpf(String cpf);
 
 	void delete(RecebidoSouSuperSeguro recebido);
+
+	List<RecebidoSouSuperSeguro> obterDadosSemProposta();
+	
+	List<RecebidoSouSuperSeguro> obterDadosNaoEnviadoCobrancaTitular();
 }

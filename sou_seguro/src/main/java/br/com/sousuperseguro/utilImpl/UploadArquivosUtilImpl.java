@@ -2,6 +2,7 @@ package br.com.sousuperseguro.utilImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -70,17 +71,7 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 						String numeroDaProposta = "";
 						BigInteger novoIdProposta;
 						
-						if(retorno.getcCategoria().name().equals("DEPENDENTES")) {
-							
-							Proposta proposta = propostaRepository.verificarPropostaPeloNome(retorno.getRecebidoSouSuperSeguroCobranca().getNmCobr());
-							retorno.setNroProposta(proposta.getPropostaPronta());
-							numeroDaProposta = proposta.getPropostaPronta();
-							
-							
-							// verificar esse trecho de código
-							novoIdProposta = new BigInteger("1");
-							
-						} else {
+						if(retorno.getcCategoria().name().equals("TITULAR")) {
 							
 							Proposta proposta = propostaRepository.selecionarUltimo();
 							
@@ -94,34 +85,46 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 							
 							numeroDaProposta = propostaService.calcularProposta(novoIdProposta);
 							retorno.setNroProposta(numeroDaProposta);
-						}
-						
-						Proposta propostaNova = new Proposta();
-						propostaNova.setPropostaPronta(numeroDaProposta);
-						
-						
-						
-						try {
+							
+							Proposta propostaNova = new Proposta();
+							propostaNova.setPropostaPronta(numeroDaProposta);
 
-							RecebidoSouSuperSeguro ultimoRecebido = uploadDeArquivosRepository.insertDadosComSelect(retorno);
-							propostaNova.setIdRecebidoSouSuperSeguro(ultimoRecebido);
-							
-							propostaRepository.insert(propostaNova);
-							
-							if(retorno.getRecebidoSouSuperSeguroPagamentoMensalidade().getTpCobr().getTipoCobranca() == 1) {
-								BoletoViewer boleto = boletoBancario.gerarBoleto(retorno, novoIdProposta);
-								envioDeEmail.enviarEmailComBoleto(retorno, boleto);
+							try {
+
+								RecebidoSouSuperSeguro ultimoRecebido = uploadDeArquivosRepository.insertDadosComSelect(retorno);
+								propostaNova.setIdRecebidoSouSuperSeguro(ultimoRecebido);
+								
+								propostaRepository.insert(propostaNova);
+								
+							} catch(Exception e) {
+								e.printStackTrace();
+								
+								RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(retorno);
+													
+								uploadDeArquivosRepository.insertDados(retornoRecusado);
 							}
 							
-						} catch(Exception e) {
-							e.printStackTrace();
+						} else {
 							
-							RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(retorno);
-												
-							uploadDeArquivosRepository.insertDados(retornoRecusado);
-						}		
+							try{
+							
+								uploadDeArquivosRepository.insertDados(retorno);
+							
+							} catch(Exception e) {
+								e.printStackTrace();
+								
+								RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(retorno);
+													
+								uploadDeArquivosRepository.insertDados(retornoRecusado);
+							}
+							
+						}			
 					}
 				}
+				
+				
+				this.mesclaDeDados();
+				
 				
 				
 			} catch (IOException e) {
@@ -130,6 +133,70 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 		}
 	}
 
+	
+	private void mesclaDeDados() {
+		List<RecebidoSouSuperSeguro> listaRecebidosSemProposta = uploadDeArquivosRepository.obterDadosSemProposta();
+		
+		for(RecebidoSouSuperSeguro dadoSemProposta: listaRecebidosSemProposta) {
+			
+			RecebidoSouSuperSeguro dadosTitularDoSeguro = uploadDeArquivosRepository.obterRecebidoPorCpf(dadoSemProposta.getRecebidoSouSuperSeguroCobranca().getCpfCobr());
+			
+			/* Aqui mesclo os dados do titular com dependente. 
+			 * Coloco o número de proposta no dependente e mudo o valor do boleto do titular
+			 */
+			
+			dadoSemProposta.setNroProposta(dadosTitularDoSeguro.getNroProposta());
+			uploadDeArquivosRepository.insertDados(dadoSemProposta);
+			
+//			if(dadosTitularDoSeguro.isEnvioEmail()) {
+//				
+//				this.enviarEmail(dadoSemProposta);
+//					
+//			} else {
+//				BigDecimal valorSemProposta = dadoSemProposta.getRecebidoSouSuperSeguroPagamentoMensalidade().getValor();
+//				dadosTitularDoSeguro.getRecebidoSouSuperSeguroPagamentoMensalidade().setValor(
+//						valorSemProposta.add(
+//								dadosTitularDoSeguro.getRecebidoSouSuperSeguroPagamentoMensalidade().getValor()));
+//				
+//				uploadDeArquivosRepository.insertDados(dadosTitularDoSeguro);	
+//			}
+	
+		}
+	
+		this.verificarListaDeNaoEnviados();
+	}
+	
+	
+	private void verificarListaDeNaoEnviados() {
+		List<RecebidoSouSuperSeguro> listaNaoEnviadaEmail = uploadDeArquivosRepository.obterDadosNaoEnviadoCobrancaTitular();
+		
+		for(RecebidoSouSuperSeguro dadosRecebidoEmailNaoEnviado : listaNaoEnviadaEmail) {
+			this.enviarEmail(dadosRecebidoEmailNaoEnviado);
+		}
+		
+	}
+	
+	
+	private void enviarEmail(RecebidoSouSuperSeguro dados) {
+			
+		Proposta proposta = propostaRepository.obterPropostaPorRecebidoSuperSeguro(dados);
+		
+//		if (proposta == null) {
+//			proposta = propostaRepository.obterPropostaPorNumeroDeProposta(dados.getNroProposta());
+//		}
+		
+		BoletoViewer boleto = boletoBancario.gerarBoleto(dados, proposta.getId());
+		
+		try{
+			envioDeEmail.enviarEmailComBoleto(dados, boleto);
+			dados.setEnvioEmail(true);
+			uploadDeArquivosRepository.insertDados(dados);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+
+
 	@Override
 	public void fazerUpload(RecebidoSouSuperSeguroRecusada retornoNovaEntidade) {
 		
@@ -137,48 +204,71 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 		
 		RecebidoSouSuperSeguro retorno = stringParaArray.paraCorretos(retornoNovaEntidade);
 		
-		
-		Proposta proposta = propostaRepository.selecionarUltimo();
-		BigInteger novoIdProposta;
-		
-		if(proposta == null) {
-			
-			novoIdProposta = new BigInteger("1");
-			
-		} else {
-			
-			novoIdProposta = proposta.getId().add(new BigInteger("1"));
-			
-		}
-		
-		String numeroDaProposta = propostaService.calcularProposta(novoIdProposta);
-		retorno.setNroProposta(numeroDaProposta);
-		
-		Proposta propostaNova = new Proposta();
-		propostaNova.setPropostaPronta(numeroDaProposta);
-		
-		
+	
 		if(retorno != null) {
-			try {
-				RecebidoSouSuperSeguro ultimoRecebido = uploadDeArquivosRepository.insertDadosComSelect(retorno);
-				propostaNova.setIdRecebidoSouSuperSeguro(ultimoRecebido);
+			
+			if(retorno.getcCategoria().name().equals("TITULAR")) {
 				
-				propostaRepository.insert(propostaNova);
 				
-				BoletoViewer boleto = boletoBancario.gerarBoleto(retorno, novoIdProposta);
-				envioDeEmail.enviarEmailComBoleto(ultimoRecebido, boleto);
+				Proposta proposta = propostaRepository.selecionarUltimo();
+				BigInteger novoIdProposta;
 				
-				uploadDeArquivosRepository.delete(retornoNovaEntidade);
+				if(proposta == null) {
+					
+					novoIdProposta = new BigInteger("1");
+					
+				} else {
+					
+					novoIdProposta = proposta.getId().add(new BigInteger("1"));
+					
+				}
 				
-			} catch(Exception e) {
+				String numeroDaProposta = propostaService.calcularProposta(novoIdProposta);
+				retorno.setNroProposta(numeroDaProposta);
 				
-				RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(retorno);
-									
-				uploadDeArquivosRepository.insertDados(retornoRecusado);
-				uploadDeArquivosRepository.delete(retornoNovaEntidade);
+				Proposta propostaNova = new Proposta();
+				propostaNova.setPropostaPronta(numeroDaProposta);
+				
+				
+				
+				try {
+					RecebidoSouSuperSeguro ultimoRecebido = uploadDeArquivosRepository.insertDadosComSelect(retorno);
+					propostaNova.setIdRecebidoSouSuperSeguro(ultimoRecebido);
+					
+					propostaRepository.insert(propostaNova);
+					
+					BoletoViewer boleto = boletoBancario.gerarBoleto(retorno, novoIdProposta);
+					envioDeEmail.enviarEmailComBoleto(ultimoRecebido, boleto);
+					
+					uploadDeArquivosRepository.delete(retornoNovaEntidade);
+					
+				} catch(Exception e) {
+					
+					RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(retorno);
+										
+					uploadDeArquivosRepository.insertDados(retornoRecusado);
+					uploadDeArquivosRepository.delete(retornoNovaEntidade);
+				}
+				
+			} else {
+				
+				try{
+					
+					uploadDeArquivosRepository.insertDados(retorno);
+				
+				} catch(Exception e) {
+					e.printStackTrace();
+					
+					RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(retorno);
+										
+					uploadDeArquivosRepository.insertDados(retornoRecusado);
+				}
+				
 			}
 		}
 		
+		this.mesclaDeDados();
+	
 	}
 
 }
