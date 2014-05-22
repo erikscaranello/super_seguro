@@ -10,17 +10,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Layout;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.RollingFileAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +38,7 @@ public class TesteCronTab {
 	
 	@RequestMapping("/test")
 	@ResponseBody
-	public String executar(HttpServletRequest request) {
+	public String executar() {
 		
 		String saida = "";
 		
@@ -82,8 +76,8 @@ public class TesteCronTab {
 				if (FTPReply.isPositiveCompletion(ftp.getReplyCode())) {
 					ftp.login("superseg.bdpf", "$3gur@bdpf%");
 
-					ftp.enterRemotePassiveMode();
-//					ftp.enterLocalPassiveMode();
+//					ftp.enterRemotePassiveMode();
+					ftp.enterLocalPassiveMode();
 					
 					
 					String retornoArquivoMontado = montagemDeArquivo
@@ -140,7 +134,7 @@ public class TesteCronTab {
 
 						} else {
 							logger.error("Erro");
-							saida = saida + "Erro" + " ___ ";
+							saida = saida + "Erro local" + " ___ ";
 						}
 
 						ftp.disconnect();

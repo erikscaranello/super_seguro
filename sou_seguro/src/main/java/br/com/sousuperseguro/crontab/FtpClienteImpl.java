@@ -12,6 +12,9 @@ import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -29,17 +32,32 @@ public class FtpClienteImpl {
 
 	@Autowired
 	ArquivosEnvioService arquivosEnvioService;
+	
+	static Logger logger = Logger.getLogger(FtpClienteImpl.class);
 
-	@Scheduled(cron = "55 09 * * * *")
-	public void executar() {
-
+	@Scheduled(cron = "30 22 * * * *")
+	public void executar() {		
+		BasicConfigurator.configure();  
+        
+//		FileAppender fileAppender = new RollingFileAppender();
+//		fileAppender.setLayout(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN));
+//		fileAppender.setFile(localServidor + "\\sou_seguro\\WEB-INF\\logs\\logEnvioBradesco.log");
+		
+//		logger.addAppender(fileAppender);
+		
+		logger.setLevel(Level.INFO);
+		
+		
 		Date d = new Date();
 		Calendar calendario = new GregorianCalendar();
 		calendario.setTime(d);
-		System.out
-				.println("Iniciou execução envio de arquivo para cliente na data: "
-						+ calendario.getTime());
-
+		
+		logger.info("Iniciou execução envio de arquivo para cliente na data: "
+				+ calendario.getTime());
+		
+//		saida = saida + "Iniciou execução envio de arquivo para cliente na data: "
+//				+ calendario.getTime() + " ___ ";
+		
 		List<RecebidoSouSuperSeguro> listaRecebidos = arquivosEnvioService
 				.selecionarRecebidosSuperSeguro();
 
@@ -53,8 +71,8 @@ public class FtpClienteImpl {
 				if (FTPReply.isPositiveCompletion(ftp.getReplyCode())) {
 					ftp.login("superseg.bdpf", "$3gur@bdpf%");
 
-					ftp.enterRemotePassiveMode();
-//					ftp.enterLocalPassiveMode();
+//					ftp.enterRemotePassiveMode();
+					ftp.enterLocalPassiveMode();
 					
 					
 					String retornoArquivoMontado = montagemDeArquivo
@@ -104,10 +122,14 @@ public class FtpClienteImpl {
 										.insertRecebidoEnviado(recebido);
 							}
 
-							System.out.println("Arquivo enviado");
+							logger.info("Arquivo enviado");
+							
+//							saida = saida + "Arquivo enviado" + " ___ ";
+							
 
 						} else {
-							System.out.println("Erro");
+							logger.error("Erro");
+//							saida = saida + "Erro local" + " ___ ";
 						}
 
 						ftp.disconnect();
@@ -116,20 +138,20 @@ public class FtpClienteImpl {
 						e.printStackTrace();
 					}
 				} else {
+					logger.error("Conexao recusada");
 					ftp.disconnect();
-					System.out.println("Conexao recusada");
 					System.exit(1);
 				}
 
 			} catch (SocketException e) {
-
+				logger.error("penultimo erro");
 				e.printStackTrace();
 			} catch (IOException e) {
-
+				logger.error("ultimo erro");
 				e.printStackTrace();
 			}
 		}
-
+		
 	}
 
 }
