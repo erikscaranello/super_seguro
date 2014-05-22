@@ -2,7 +2,6 @@ package br.com.sousuperseguro.utilImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
 import br.com.sousuperseguro.entities.Proposta;
 import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroRecusada;
-import br.com.sousuperseguro.enums.Categoria;
 import br.com.sousuperseguro.repository.PropostaRepository;
 import br.com.sousuperseguro.repository.UploadDeArquivosRepository;
 import br.com.sousuperseguro.service.PropostaService;
@@ -189,7 +187,7 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 		
 		try{
 			envioDeEmail.enviarEmailComBoleto(dados, boleto);
-			dados.setEnvioEmail(true);
+//			dados.setEnvioEmail(true);
 			uploadDeArquivosRepository.insertDados(dados);
 		} catch (Exception e) {
 			e.printStackTrace();

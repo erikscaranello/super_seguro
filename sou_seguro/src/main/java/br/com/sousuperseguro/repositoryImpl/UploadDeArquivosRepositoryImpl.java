@@ -271,7 +271,7 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
 			Criteria criteria = this.session.createCriteria(RecebidoSouSuperSeguro.class); 
 			
 			
-			criteria.add(Restrictions.eq("envioEmail", false));
+//			criteria.add(Restrictions.eq("envioEmail", false));
 			criteria.add(Restrictions.eq("cCategoria", Categoria.TITULAR));
 			
 			criteria.createAlias("recebidoSouSuperSeguroPagamentoMensalidade", "recebido");

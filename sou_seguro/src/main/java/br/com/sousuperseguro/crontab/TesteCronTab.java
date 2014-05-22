@@ -10,36 +10,65 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Layout;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.sousuperseguro.entities.ArquivosEnvio;
 import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.service.ArquivosEnvioService;
 import br.com.sousuperseguro.util.MontagemDeArquivo;
 
-@Component
-public class FtpClienteImpl {
-
+@Controller
+public class TesteCronTab {
+	
 	@Autowired
 	MontagemDeArquivo montagemDeArquivo;
 
 	@Autowired
 	ArquivosEnvioService arquivosEnvioService;
-
-	@Scheduled(cron = "55 09 * * * *")
-	public void executar() {
-
+	
+	static Logger logger = Logger.getLogger(TesteCronTab.class);
+	
+	@RequestMapping("/test")
+	@ResponseBody
+	public String executar(HttpServletRequest request) {
+		
+		String saida = "";
+		
+		BasicConfigurator.configure();  
+        
+//		FileAppender fileAppender = new RollingFileAppender();
+//		fileAppender.setLayout(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN));
+//		fileAppender.setFile(localServidor + "\\sou_seguro\\WEB-INF\\logs\\logEnvioBradesco.log");
+		
+//		logger.addAppender(fileAppender);
+		
+		logger.setLevel(Level.INFO);
+		
+		
 		Date d = new Date();
 		Calendar calendario = new GregorianCalendar();
 		calendario.setTime(d);
-		System.out
-				.println("Iniciou execução envio de arquivo para cliente na data: "
-						+ calendario.getTime());
-
+		
+		logger.info("Iniciou execução envio de arquivo para cliente na data: "
+				+ calendario.getTime());
+		
+		saida = saida + "Iniciou execução envio de arquivo para cliente na data: "
+				+ calendario.getTime() + " ___ ";
+		
 		List<RecebidoSouSuperSeguro> listaRecebidos = arquivosEnvioService
 				.selecionarRecebidosSuperSeguro();
 
@@ -104,10 +133,14 @@ public class FtpClienteImpl {
 										.insertRecebidoEnviado(recebido);
 							}
 
-							System.out.println("Arquivo enviado");
+							logger.info("Arquivo enviado");
+							
+							saida = saida + "Arquivo enviado" + " ___ ";
+							
 
 						} else {
-							System.out.println("Erro");
+							logger.error("Erro");
+							saida = saida + "Erro" + " ___ ";
 						}
 
 						ftp.disconnect();
@@ -116,20 +149,24 @@ public class FtpClienteImpl {
 						e.printStackTrace();
 					}
 				} else {
+					logger.error("Conexao recusada");
 					ftp.disconnect();
-					System.out.println("Conexao recusada");
 					System.exit(1);
 				}
 
 			} catch (SocketException e) {
-
+				logger.error("penultimo erro");
 				e.printStackTrace();
 			} catch (IOException e) {
-
+				logger.error("ultimo erro");
 				e.printStackTrace();
 			}
 		}
-
+		return saida;
+		
 	}
-
+	
+	
+	
+	
 }
