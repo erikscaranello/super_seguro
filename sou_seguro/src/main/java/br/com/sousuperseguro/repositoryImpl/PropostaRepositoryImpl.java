@@ -108,7 +108,7 @@ public class PropostaRepositoryImpl implements PropostaRepository{
 			tx = session.beginTransaction();
 			Criteria criteria = this.session.createCriteria(Proposta.class);
 			
-			criteria.add(Restrictions.eq("idRecebidoSouSuperSeguro", dadosRecebidoEmailNaoEnviado));
+			criteria.add(Restrictions.eq("propostaPronta", dadosRecebidoEmailNaoEnviado.getNroProposta()));
 			criteria.setMaxResults(1);
 			Proposta proposta = (Proposta) criteria.uniqueResult();
 		

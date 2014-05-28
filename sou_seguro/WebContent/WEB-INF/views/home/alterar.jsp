@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -16,7 +16,7 @@
 	
 		<div class="panel panel-success setenta-por-cento">
 			<div class="panel-heading">
-				<h3 class="panel-title">MovimentaÃ§Ã£o de Associados</h3>
+				<h3 class="panel-title">Movimentação de Associados</h3>
 			</div>
 			<div class="panel-body"> 
 <!-- 				<div class="form-group margin-um-por-cento"> -->
@@ -49,13 +49,13 @@
 				</div>
 				
 <!-- 				<div class="form-group margin-um-por-cento"> -->
-<!-- 				   	<p>NÃºmero da proposta</p> -->
+<!-- 				   	<p>Número da proposta</p> -->
 <%-- 				   	<input type="text" class="form-control obrigatorio" name="nroProposta" value="${arquivoRecusado.nroProposta}"> --%>
 <!-- 					<span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
 <!-- 				</div> -->
 				
 <!-- 				<div class="form-group margin-um-por-cento"> -->
-<!-- 				   	<p>MatrÃ­cula</p> -->
+<!-- 				   	<p>Matrícula</p> -->
 <%-- 				   	<input type="text" class="form-control obrigatorio" name="cdMatricula" value="${arquivoRecusado.cdMatricula}"> --%>
 <!-- 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> -->
 <!-- 				</div> -->
@@ -65,14 +65,14 @@
 				   	<select name="cParentesco" class="form-control form-control obrigatorio">
   						<option value="${arquivoRecusado.cParentesco}">${arquivoRecusado.cParentesco}</option>
   						<option value="PAI">PAI</option>
-  						<option value="MAE">MÃƒE</option>
+  						<option value="MAE">MÃE</option>
   						<option value="FILHA">FILHA</option>
   						<option value="FILHO">FILHO</option>
-  						<option value="CONJUGE">CÃ”NJUGE</option>
+  						<option value="CONJUGE">CÔNJUGE</option>
   						<option value="COMPANHEIRO">COMPANHEIRO</option>
   						<option value="AGREGADO">AGREGADO</option>
-  						<option value="IRMAO">IRMÃƒO</option>
-  						<option value="IRMA">IRMÃƒ</option>
+  						<option value="IRMAO">IRMÃO</option>
+  						<option value="IRMA">IRMÃ</option>
   						<option value="SOBRINHO">SOBRINHO</option>
   						<option value="NETO">NETO</option>
   						<option value="AVO">AVO</option>
@@ -126,7 +126,7 @@
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>Nome da mÃ£e</p>
+				   	<p>Nome da mãe</p>
 				   	<input type="text" class="form-control obrigatorio" name="nomeMae" value="${arquivoRecusado.nomeMae}">
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
 				</div>
@@ -146,7 +146,7 @@
   						<option value="DIVORCIADO">DIVORCIADO</option>
   						<option value="SEPARADO">SEPARADO</option>
   						<option value="SOLTEIRO">SOLTEIRO</option>
-  						<option value="VIUVO">VIÃšVO</option>
+  						<option value="VIUVO">VIÚVO</option>
 					</select>
 				</div>
 				
@@ -157,7 +157,7 @@
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>NÃºmero</p>
+				   	<p>Número</p>
 				   	<input type="text" class="form-control obrigatorio" name="rNumeroRes" value="${arquivoRecusado.rNumeroRes}">
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
 				</div>
@@ -199,7 +199,7 @@
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>ReferÃªncia</p>
+				   	<p>Referência</p>
 				   	<input type="text" class="form-control" name="referenciaRes" value="${arquivoRecusado.referenciaRes}">
 					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
@@ -271,7 +271,7 @@
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>Data da adesÃ£o</p>
+				   	<p>Data da adesão</p>
 				   	<input type="text" class="form-control" name="dtAdesao" value="<fmt:formatDate pattern="dd-MM-yyyy" 
 	            value="${arquivoRecusado.dtAdesao.time}" />">
 					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
