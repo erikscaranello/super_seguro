@@ -190,6 +190,8 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
 			Criteria criteria = this.session.createCriteria(RecebidoSouSuperSeguro.class); 
 			
 			criteria.add(Restrictions.eq("cpf", cpf));
+			criteria.addOrder(Order.desc("id"));
+			criteria.setMaxResults(1);
 			RecebidoSouSuperSeguro retorno = (RecebidoSouSuperSeguro) criteria.uniqueResult();
 			
 			tx.commit();	
