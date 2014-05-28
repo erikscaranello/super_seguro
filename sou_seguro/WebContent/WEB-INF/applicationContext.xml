@@ -12,8 +12,8 @@
 	
 	<http auto-config="true" access-denied-page="/acessoNegado">
 		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/enviar_bradesco" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/receber_bradesco" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/test" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+<!-- 		<intercept-url pattern="/receber_bradesco" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
 		<intercept-url pattern="/recuperacao_de_senha/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
 		
