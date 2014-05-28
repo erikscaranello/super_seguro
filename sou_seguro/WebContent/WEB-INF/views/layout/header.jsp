@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="iso-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 			
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />" />
@@ -36,10 +36,10 @@
 			
 			<ul class="nav nav-tabs">
   				<li id="upload_de_arquivos"><a href="<c:url value="/upload_de_arquivos" />">Fazer upload de arquivos</a></li>
-  				<li id="correcao_de_arquivos"><a href="<c:url value="/alterar_dados/0" />">InserÃ§Ã£o de arquivo manual</a></li>
-<%--   				<li id="verificacao_de_boletos"><a href="<c:url value="/verificacao_de_boletos" />">VerificaÃ§Ã£o de boletos</a></li> --%>
-  				<li id="alterar_proprias_infos"><a href="<c:url value="/alterar_proprias_infos" />">Alterar suas informaÃ§Ãµes</a></li>
-  				<li id="usuarios" style="display:none;"><a href="<c:url value="/usuarios" />">UsuÃ¡rios</a></li>
+  				<li id="correcao_de_arquivos"><a href="<c:url value="/alterar_dados/0" />">Inserção de arquivo manual</a></li>
+<%--   				<li id="verificacao_de_boletos"><a href="<c:url value="/verificacao_de_boletos" />">Verificação de boletos</a></li> --%>
+  				<li id="alterar_proprias_infos"><a href="<c:url value="/alterar_proprias_infos" />">Alterar suas informações</a></li>
+  				<li id="usuarios" style="display:none;"><a href="<c:url value="/usuarios" />">Usuários</a></li>
 			</ul>
 			
 			

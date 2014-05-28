@@ -160,10 +160,10 @@ public class BoletoBancarioImpl implements BoletoBancario {
 		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente no Banco Bradesco.");
 		
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
-		boletoViewer.setTemplate("C:/Users/Pc6/pagadorBeneficiario.pdf");
+		boletoViewer.setTemplate("/home/boleto/pagadorBeneficiario.pdf");
 //		/home/boleto/pagadorBeneficiario.pdf
 //		C:/Users/Pc6/pagadorBeneficiario.pdf
-		
+//		C:/pagadorBeneficiario.pdf
 		
 //		File file = new File("C:\\Users\\Erik Scaranello\\Documents\\boleto.pdf"); //Criamos um nome para o arquivo  
 //		BufferedOutputStream bos = null;

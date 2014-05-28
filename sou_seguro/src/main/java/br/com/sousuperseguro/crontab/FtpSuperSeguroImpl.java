@@ -1,26 +1,6 @@
 package br.com.sousuperseguro.crontab;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.SocketException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
-import org.apache.commons.net.ftp.FTPReply;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import br.com.sousuperseguro.entities.ArquivosEnvio;
-import br.com.sousuperseguro.service.ArquivosEnvioService;
-import br.com.sousuperseguro.util.LeituraDeArquivo;
 
 @Component
 public class FtpSuperSeguroImpl{

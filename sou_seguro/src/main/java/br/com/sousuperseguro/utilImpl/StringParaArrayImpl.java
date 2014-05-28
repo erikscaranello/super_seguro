@@ -38,7 +38,7 @@ public class StringParaArrayImpl implements StringParaArray{
 			HSSFCell cell = linhaRecebida.getCell(0);
 			String cellValue = cell.getStringCellValue();
 			
-			if(cellValue != null && !cellValue.contains("CSTATUS")) {
+			if(cellValue != null && ! cellValue.isEmpty() && !cellValue.contains("CSTATUS")) {
 				
 				for(int i = 0; i < linhaRecebida.getLastCellNum(); i++) {
 					if (linhaRecebida.getCell(i).getCellType() == 0) {
@@ -91,7 +91,7 @@ public class StringParaArrayImpl implements StringParaArray{
 				
 
 				
-				recebidoSouSuperSeguro.setcSexo(verificarEnums.verificarSexo(linhaRecebida.getCell(5).getStringCellValue().isEmpty() ? null : linhaRecebida.getCell(5).getStringCellValue()));
+				recebidoSouSuperSeguro.setcSexo(linhaRecebida.getCell(5).getStringCellValue().isEmpty() ? null : verificarEnums.verificarSexo(linhaRecebida.getCell(5).getStringCellValue()));
 				recebidoSouSuperSeguro.setCpf(linhaRecebida.getCell(6).getStringCellValue().isEmpty() ? null : linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", ""));
 				recebidoSouSuperSeguro.setNomeMae(linhaRecebida.getCell(7).getStringCellValue().isEmpty() ? null : linhaRecebida.getCell(7).getStringCellValue());
 				

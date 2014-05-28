@@ -31,7 +31,7 @@ public class NossoNumeroImpl implements NossoNumero {
 		
 		int somaNossoNumero = 0;
 		
-		for(int j = 0; j < idNossoNumero.length() - 1; j++ ) {
+		for(int j = 0; j < idNossoNumero.length(); j++ ) {
 			
 			String substring = idNossoNumero.substring(j, j + 1);
 			int multiplicacao = multiplicadores[j] * Integer.parseInt(substring);

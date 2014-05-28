@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -17,11 +17,11 @@
 		
 		<div class="panel panel-success setenta-por-cento">
 			<div class="panel-heading">
-				<h3 class="panel-title">Contratante responsÃ¡vel pelos Pagamentos</h3>
+				<h3 class="panel-title">Contratante responsável pelos Pagamentos</h3>
 			</div>
 			<div class="panel-body"> 
 				<div class="form-group margin-um-por-cento">
-				   	<p>Nome do responsÃ¡vel</p>
+				   	<p>Nome do responsável</p>
 				   	<input type="text" class="form-control obrigatorio" name="nmCobr" value="${arquivoRecusado.nmCobr}">
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
 				</div>
@@ -46,7 +46,7 @@
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>NÃºmero</p>
+				   	<p>Número</p>
 				   	<input type="text" class="form-control obrigatorio" name="rNumeroCobr" value="${arquivoRecusado.rNumeroCobr}">
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
 				</div>
@@ -154,7 +154,7 @@
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>Data do inÃ­cio da cobranÃ§a</p>
+				   	<p>Data do início da cobrança</p>
 				   	<input type="email" class="form-control obrigatorio" name="dataInicioCobr" value="<fmt:formatDate pattern="dd-MM-yyyy" 
 	            value="${arquivoRecusado.dataInicioCobr.time}" />">
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>

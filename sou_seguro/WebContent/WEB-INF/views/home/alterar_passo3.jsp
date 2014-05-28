@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -26,20 +26,20 @@
 				   	<select name="nroBanco" class="form-control form-control obrigatorio">
   						<option value="${arquivoRecusado.nroBanco}">${arquivoRecusado.nroBanco}</option>
   						<option value="BRADESCO">BRADESCO</option>
-  						<option value="ITAU">ITAÃš</option>
+  						<option value="ITAU">ITAÚ</option>
   						<option value="BANCO_DO_BRASIL">BANCO DO BRASIL</option>						
 					</select>	
 	
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>NÃºmero da agÃªncia</p>
+				   	<p>Número da agência</p>
 				   	<input type="text" class="form-control obrigatorio" name="nroAgencia" value="${arquivoRecusado.nroAgencia}">
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
 				</div>
 				
 				<div class="form-group margin-um-por-cento">
-				   	<p>DV da agÃªncia</p>
+				   	<p>DV da agência</p>
 				   	<input type="text" class="form-control obrigatorio" name="dvAgencia" value="${arquivoRecusado.dvAgencia}">
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
 				</div>
@@ -57,7 +57,7 @@
 				</div>
 				
 				<div class="form-group margin-um-por-cento margin-bottom-ajuste">
-				   	<p>Tipo de cobranÃ§a</p>
+				   	<p>Tipo de cobrança</p>
 				   	<select name="tpCobr" class="form-control form-control obrigatorio">
   						<option value="${arquivoRecusado.tpCobr}">${arquivoRecusado.tpCobr}</option>
   						<option value="BOLETOBANCARIO_BOLETOBANCARIO">BOLETO BANCARIO E BOLETO BANCARIO</option>
@@ -83,14 +83,14 @@
 				   	<select name="cParentescoCobr" class="form-control form-control obrigatorio">
   						<option value="${arquivoRecusado.cParentescoCobr}">${arquivoRecusado.cParentescoCobr}</option>
   						<option value="PAI">PAI</option>
-  						<option value="MAE">MÃƒE</option>
+  						<option value="MAE">MÃE</option>
   						<option value="FILHA">FILHA</option>
   						<option value="FILHO">FILHO</option>
-  						<option value="CONJUGE">CÃ”NJUGE</option>
+  						<option value="CONJUGE">CÔNJUGE</option>
   						<option value="COMPANHEIRO">COMPANHEIRO</option>
   						<option value="AGREGADO">AGREGADO</option>
-  						<option value="IRMAO">IRMÃƒO</option>
-  						<option value="IRMA">IRMÃƒ</option>
+  						<option value="IRMAO">IRMÃO</option>
+  						<option value="IRMA">IRMÃ</option>
   						<option value="SOBRINHO">SOBRINHO</option>
   						<option value="NETO">NETO</option>
   						<option value="AVO">AVO</option>
