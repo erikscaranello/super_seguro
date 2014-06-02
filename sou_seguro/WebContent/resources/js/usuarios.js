@@ -35,7 +35,7 @@ $(document).ready(function(){
 				if(resultado == true) {
 					input.css({"border-color": "#31708f", "background": "#d9edf7"});
 				} else {
-					$.getJSON("/super_seguro/usuarios/verificar_login", { login: $("input[name='login']").val()}, function(retorno){
+					$.getJSON("/sou_seguro/usuarios/verificar_login", { login: $("input[name='login']").val()}, function(retorno){
 						if(retorno == false) {
 							input.css({"border-color": "#31708f", "background": "#d9edf7"});
 						} else {
@@ -208,8 +208,8 @@ function remover (dom) {
 						} else {
 							$("#dialog-confirm").dialog( "close" );
 
-							$('body').append('<div id="dialog-message" title="Registro exclu&iacute;do">'+
-							  '<p>Seu registro foi exclu&iacute;do com sucesso!</p></div>');
+							$('body').append('<div id="dialog-message" title="Registro n&atilde;o exclu&iacute;do">'+
+							  '<p>N&atilde;o foi poss&iacute;vel excluir o registro!</p></div>');
 							
 							$( "#dialog-message" ).dialog({
 								resizable: true,  
@@ -232,3 +232,17 @@ function remover (dom) {
 	
 	
 }
+
+
+function verificarPasswords() {
+	 if($("input[name='confirm_password']").val() == $("input[name='password']").val()) {
+	 
+		 $("input[name='confirm_password']").css({"border-color": "#31708f", "background": "#d9edf7"});
+		 $("input[name='password']").css({"border-color": "#31708f", "background": "#d9edf7"});
+	
+	 } else {
+		 $("input[name='confirm_password']").css({"border-color": "#a94442", "background": "#f2dede"});
+		 $("input[name='password']").css({"border-color": "#a94442", "background": "#f2dede"});
+	 }
+}
+
