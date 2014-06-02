@@ -20,22 +20,29 @@ public class LeituraDeArquivoImpl implements LeituraDeArquivo {
 	
 	@Override
 	public void lerLinha(String linha) {
-		if(! linha.substring(0, 0).equals("0") || ! linha.substring(0, 0).equals("9")) {
+		if(linha != null) {
 			
-			String cpf = linha.substring(127, 138);
-			RecebidoSouSuperSeguro recebido = uploadDeArquivosRepository.obterRecebidoPorCpf(cpf);			
-			
-			if(recebido != null) {
-				RecebidoSouSuperSeguroRecusada recebidoRecusado = stringParaArray.paraRecusados(recebido);
-				recebidoRecusado.setRecebidoBradesco(true);
-				recebidoRecusado.setCodigoErro(linha.substring(147, 151));
+			if(! linha.substring(0, 0).equals("0") || ! linha.substring(0, 0).equals("9")) {
 				
-				uploadDeArquivosRepository.delete(recebido);
-				uploadDeArquivosRepository.insertDados(recebidoRecusado);
+				if(!linha.substring(147, 151).equals("0000")) {
+					String cpf = linha.substring(127, 138);
+					RecebidoSouSuperSeguro recebido = uploadDeArquivosRepository.obterRecebidoPorCpf(cpf);
+					
+					if(recebido != null) {
+						RecebidoSouSuperSeguroRecusada recebidoRecusado = stringParaArray.paraRecusados(recebido);
+						recebidoRecusado.setRecebidoBradesco(true);
+						recebidoRecusado.setCodigoErro(linha.substring(147, 151));
+						
+						uploadDeArquivosRepository.delete(recebido);
+						uploadDeArquivosRepository.insertDados(recebidoRecusado);
+					}
+				}
+				
+							
+				
+				
+				
 			}
-			
-			
-			
 		} 
 	}
 

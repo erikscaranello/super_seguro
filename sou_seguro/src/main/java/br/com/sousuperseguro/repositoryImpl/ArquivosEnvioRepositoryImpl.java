@@ -159,4 +159,28 @@ public class ArquivosEnvioRepositoryImpl implements ArquivosEnvioRepository {
 		}
 		
 	}
+
+
+
+	@Override
+	public void updateArquivosParaLido(ArquivosEnvio arquivoEnvioInsert) {
+		this.session = criarConexao.getSession();
+    	Transaction tx = null;
+    	
+    	try{
+    		tx = session.beginTransaction();
+    		session.saveOrUpdate(arquivoEnvioInsert); 
+    		tx.commit();
+    	
+    	} catch (HibernateException e) {
+    		e.printStackTrace();
+    		if (tx!=null) {
+    			tx.rollback();
+    			throw e;
+    		}
+    		
+    	} finally {
+    		session.close(); 
+    	}
+	}
 }

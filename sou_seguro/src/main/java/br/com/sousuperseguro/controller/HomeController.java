@@ -85,7 +85,10 @@ public class HomeController {
 		
 		recebidoSouSuperSeguro.setContrato(request.getParameter("contrato"));
 		
-		recebidoSouSuperSeguro.setNroProposta(request.getParameter("nroProposta"));
+		if(!request.getParameter("nroProposta").isEmpty()) {
+			recebidoSouSuperSeguro.setNroProposta(request.getParameter("nroProposta"));	
+		}
+		
 		recebidoSouSuperSeguro.setCdMatricula(request.getParameter("cdMatricula"));
 		
 		recebidoSouSuperSeguro.setcStatus(request.getParameter("cStatus").isEmpty() ? null : Status.valueOf(request.getParameter("cStatus")));
@@ -205,6 +208,7 @@ public class HomeController {
 			modelAndView.addObject("arquivoRecusado", retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca());
 		}
 		
+		recebidoSouSuperSeguro.setRecebidoBradesco(Boolean.parseBoolean(request.getParameter("recebidoBradesco")));
 		
 		homeService.alteracaoSouSuperSeguro(recebidoSouSuperSeguro);
 		

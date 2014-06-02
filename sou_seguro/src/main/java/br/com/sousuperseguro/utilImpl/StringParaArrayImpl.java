@@ -234,6 +234,11 @@ public class StringParaArrayImpl implements StringParaArray{
 		recusado.setnFone1(retorno.getnFone1());
 		recusado.setEmail(retorno.getEmail());
 		
+		if(retorno.getNroProposta() != null) {
+			recusado.setNroProposta(retorno.getNroProposta());
+		}
+		
+		
 		RecebidoSouSuperSeguroCobrancaRecusada cobrancaRecusada = new RecebidoSouSuperSeguroCobrancaRecusada();
 		cobrancaRecusada.setNmCobr(retorno.getRecebidoSouSuperSeguroCobranca().getNmCobr());
 		cobrancaRecusada.setDtNascCobr(retorno.getRecebidoSouSuperSeguroCobranca().getDtNascCobr());
@@ -325,6 +330,10 @@ public class StringParaArrayImpl implements StringParaArray{
 		recebido.setDtAdesao(retornoNovaEntidade.getDtAdesao());
 		recebido.setDtCancelamento(retornoNovaEntidade.getDtCancelamento());
 		recebido.setcMotivoCan(retornoNovaEntidade.getcMotivoCan());
+		
+		if(retornoNovaEntidade.getNroProposta() != null) {
+			recebido.setNroProposta(retornoNovaEntidade.getNroProposta());
+		}
 		
 		RecebidoSouSuperSeguroCobranca cobranca = new RecebidoSouSuperSeguroCobranca();
 		cobranca.setNmCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getNmCobr());

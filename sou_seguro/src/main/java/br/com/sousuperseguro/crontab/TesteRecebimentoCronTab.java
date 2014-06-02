@@ -1,6 +1,7 @@
 package br.com.sousuperseguro.crontab;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,17 +12,19 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.sousuperseguro.entities.ArquivosEnvio;
 import br.com.sousuperseguro.service.ArquivosEnvioService;
 import br.com.sousuperseguro.util.LeituraDeArquivo;
 
-@Component
-public class FtpSuperSeguroImpl{
+@Controller
+public class TesteRecebimentoCronTab {
 	
 	@Autowired
 	ArquivosEnvioService arquivosEnvioService;
@@ -29,13 +32,19 @@ public class FtpSuperSeguroImpl{
 	@Autowired
 	LeituraDeArquivo leituraDeArquivo;
 	
-	@Scheduled(cron="00 08 * * * *")
-	public void executar() {
+	
+	
+	@RequestMapping("/testRecebimento")
+	@ResponseBody
+	public String recebimento() {
+		
+		String retorno = "";
 		
 		Date d = new Date();  
 		Calendar calendario = new GregorianCalendar();  
 		calendario.setTime(d);
-		System.out.println("Iniciou execução recebimento de arquivo do cliente na data: " + calendario.getTime());
+		
+		retorno = retorno + "Iniciou execução recebimento de arquivo do cliente na data: " + calendario.getTime();
 		
 		FTPClient ftp = new FTPClient();
 		
@@ -49,7 +58,7 @@ public class FtpSuperSeguroImpl{
 				ftp.enterLocalPassiveMode();
 				
 				
-				ftp.changeWorkingDirectory("Producao");
+				ftp.changeWorkingDirectory("Homologacao");
 				ftp.changeWorkingDirectory("Retorno_ODPV");
 				
 				
@@ -78,21 +87,24 @@ public class FtpSuperSeguroImpl{
             		arquivosEnvioService.updateArquivosParaLido(arquivoRecebido); 
                 }
                 
-                System.out.println(" Arquivo recebido");
+                retorno = retorno + " Arquivo recebido";
             	
 			} else {  
                 ftp.disconnect();  
-                System.out.println(" Conexao recusada"); 
+                retorno = retorno + " Conexao recusada"; 
                 System.exit(1);  
             }
 			
 		} catch (SocketException e) {
-			System.out.println(" Socket exception");
+			 retorno = retorno + " Socket exception";
 			
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println(" IO Exception");
+			 retorno = retorno + " IO Exception";
 			e.printStackTrace();
-		}	
-	}	
+		}
+		return retorno;
+		
+	}
+	
 }

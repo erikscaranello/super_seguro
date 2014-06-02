@@ -16,4 +16,6 @@ public interface ArquivosEnvioService {
 	void insertRecebidoEnviado(RecebidoSouSuperSeguro recebidoEnviado);
 
 	List<ArquivosEnvio> obterListaNaoRecebidosErro();
+	
+	void updateArquivosParaLido(ArquivosEnvio arquivoEnvioInsert);
 }

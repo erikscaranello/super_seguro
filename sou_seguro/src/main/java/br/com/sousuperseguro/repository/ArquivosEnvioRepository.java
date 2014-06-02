@@ -17,4 +17,6 @@ public interface ArquivosEnvioRepository {
 
 	List<ArquivosEnvio> obterListaNaoRecebidosErro();
 
+	void updateArquivosParaLido(ArquivosEnvio arquivoEnvioInsert);
+
 }

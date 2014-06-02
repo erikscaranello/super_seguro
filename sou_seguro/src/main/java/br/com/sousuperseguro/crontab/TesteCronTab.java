@@ -12,9 +12,6 @@ import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +31,6 @@ public class TesteCronTab {
 	@Autowired
 	ArquivosEnvioService arquivosEnvioService;
 	
-	static Logger logger = Logger.getLogger(TesteCronTab.class);
 	
 	@RequestMapping("/test")
 	@ResponseBody
@@ -42,23 +38,11 @@ public class TesteCronTab {
 		
 		String saida = "";
 		
-		BasicConfigurator.configure();  
-        
-//		FileAppender fileAppender = new RollingFileAppender();
-//		fileAppender.setLayout(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN));
-//		fileAppender.setFile(localServidor + "\\sou_seguro\\WEB-INF\\logs\\logEnvioBradesco.log");
-		
-//		logger.addAppender(fileAppender);
-		
-		logger.setLevel(Level.INFO);
-		
-		
+	
 		Date d = new Date();
 		Calendar calendario = new GregorianCalendar();
 		calendario.setTime(d);
 		
-		logger.info("Iniciou execução envio de arquivo para cliente na data: "
-				+ calendario.getTime());
 		
 		saida = saida + "Iniciou execução envio de arquivo para cliente na data: "
 				+ calendario.getTime() + " ___ ";
@@ -79,6 +63,9 @@ public class TesteCronTab {
 //					ftp.enterRemotePassiveMode();
 					ftp.enterLocalPassiveMode();
 					
+					
+					ftp.changeWorkingDirectory("Homologacao");
+					ftp.changeWorkingDirectory("Enviados_Super_Seguro");
 					
 					String retornoArquivoMontado = montagemDeArquivo
 							.montarArquivoDeEnvio(listaRecebidos);
@@ -127,13 +114,12 @@ public class TesteCronTab {
 										.insertRecebidoEnviado(recebido);
 							}
 
-							logger.info("Arquivo enviado");
 							
 							saida = saida + "Arquivo enviado" + " ___ ";
 							
 
 						} else {
-							logger.error("Erro");
+							
 							saida = saida + "Erro local" + " ___ ";
 						}
 
@@ -143,16 +129,16 @@ public class TesteCronTab {
 						e.printStackTrace();
 					}
 				} else {
-					logger.error("Conexao recusada");
+					
 					ftp.disconnect();
 					System.exit(1);
 				}
 
 			} catch (SocketException e) {
-				logger.error("penultimo erro");
+				
 				e.printStackTrace();
 			} catch (IOException e) {
-				logger.error("ultimo erro");
+				
 				e.printStackTrace();
 			}
 		}

@@ -33,26 +33,14 @@ public class FtpClienteImpl {
 	@Autowired
 	ArquivosEnvioService arquivosEnvioService;
 	
-	static Logger logger = Logger.getLogger(FtpClienteImpl.class);
-
 	@Scheduled(cron = "30 22 * * * *")
-	public void executar() {		
-		BasicConfigurator.configure();  
+	public void executar() {		  
         
-//		FileAppender fileAppender = new RollingFileAppender();
-//		fileAppender.setLayout(new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN));
-//		fileAppender.setFile(localServidor + "\\sou_seguro\\WEB-INF\\logs\\logEnvioBradesco.log");
-		
-//		logger.addAppender(fileAppender);
-		
-		logger.setLevel(Level.INFO);
-		
-		
 		Date d = new Date();
 		Calendar calendario = new GregorianCalendar();
 		calendario.setTime(d);
 		
-		logger.info("Iniciou execução envio de arquivo para cliente na data: "
+		System.out.println("Iniciou execução envio de arquivo para cliente na data: "
 				+ calendario.getTime());
 		
 //		saida = saida + "Iniciou execução envio de arquivo para cliente na data: "
@@ -74,6 +62,9 @@ public class FtpClienteImpl {
 //					ftp.enterRemotePassiveMode();
 					ftp.enterLocalPassiveMode();
 					
+					
+					ftp.changeWorkingDirectory("Producao");
+					ftp.changeWorkingDirectory("Enviados_Super_Seguro");
 					
 					String retornoArquivoMontado = montagemDeArquivo
 							.montarArquivoDeEnvio(listaRecebidos);
@@ -122,13 +113,13 @@ public class FtpClienteImpl {
 										.insertRecebidoEnviado(recebido);
 							}
 
-							logger.info("Arquivo enviado");
+							System.out.println("Arquivo enviado");
 							
 //							saida = saida + "Arquivo enviado" + " ___ ";
 							
 
 						} else {
-							logger.error("Erro");
+							System.out.println("Erro");
 //							saida = saida + "Erro local" + " ___ ";
 						}
 
@@ -138,16 +129,16 @@ public class FtpClienteImpl {
 						e.printStackTrace();
 					}
 				} else {
-					logger.error("Conexao recusada");
+					System.out.println("Conexao recusada");
 					ftp.disconnect();
 					System.exit(1);
 				}
 
 			} catch (SocketException e) {
-				logger.error("penultimo erro");
+				System.out.println("penultimo erro");
 				e.printStackTrace();
 			} catch (IOException e) {
-				logger.error("ultimo erro");
+				System.out.println("ultimo erro");
 				e.printStackTrace();
 			}
 		}

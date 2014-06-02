@@ -44,4 +44,9 @@ public class ArquivosEnvioServiceImpl implements ArquivosEnvioService{
 	public List<ArquivosEnvio> obterListaNaoRecebidosErro() {
 		return arquivosEnvioRepository.obterListaNaoRecebidosErro();
 	}
+
+	@Override
+	public void updateArquivosParaLido(ArquivosEnvio arquivoEnvioInsert) {
+		arquivosEnvioRepository.updateArquivosParaLido(arquivoEnvioInsert);
+	}
 }

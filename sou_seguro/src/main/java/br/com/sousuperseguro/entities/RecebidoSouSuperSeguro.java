@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.sousuperseguro.enums.CancelamentoDoAssociado;
 import br.com.sousuperseguro.enums.Categoria;
@@ -189,9 +190,6 @@ public class RecebidoSouSuperSeguro implements Serializable{
 	
 	private boolean enviado;
 	
-//	@Column(name="envio_email", nullable=false)
-//	private boolean envioEmail;
-
 	
 	public BigInteger getId() {
 		return id;
@@ -587,12 +585,4 @@ public class RecebidoSouSuperSeguro implements Serializable{
 	public void setEnviado(boolean enviado) {
 		this.enviado = enviado;
 	}
-
-//	public boolean isEnvioEmail() {
-//		return envioEmail;
-//	}
-//
-//	public void setEnvioEmail(boolean envioEmail) {
-//		this.envioEmail = envioEmail;
-//	}
 }
