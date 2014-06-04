@@ -29,7 +29,7 @@ public class FtpSuperSeguroImpl{
 	@Autowired
 	LeituraDeArquivo leituraDeArquivo;
 	
-	@Scheduled(cron="00 08 * * * *")
+	@Scheduled(cron="00 13 * * * *")
 	public void executar() {
 		
 		Date d = new Date();  

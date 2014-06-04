@@ -53,7 +53,7 @@
 			</div>
 			
 			<div class="form-group float-left quarenta-por-cento-margin-cinco">
-			  	<p>Usuario: <input type="radio" class="form-control" name="role" value="ROLE_USER" checked="true"></p>
+			  	<p>Usuario: <input type="radio" class="form-control" name="role" id="escolhido" value="ROLE_USER"></p>
 			</div>
 			
 			<div class="form-group float-left quarenta-por-cento-margin-cinco">

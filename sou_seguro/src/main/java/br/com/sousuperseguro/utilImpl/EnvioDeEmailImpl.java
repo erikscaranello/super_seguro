@@ -6,7 +6,6 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.mail.MultiPartEmail;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.springframework.stereotype.Component;
 
@@ -71,18 +70,17 @@ public class EnvioDeEmailImpl implements EnvioDeEmail {
 		attachment.setName(cliente.getRecebidoSouSuperSeguroCobranca().getNmCobr());
 		
 		
-		MultiPartEmail  email = new MultiPartEmail ();
+		HtmlEmail email = new HtmlEmail();
 		email.setHostName("smtp.supersegurocorretora.com.br");
 		email.setSmtpPort(587);
-		email.setAuthenticator(new DefaultAuthenticator("nao_responder@supersegurocorretora.com.br", "35jkg6w1"));
+		email.setAuthenticator(new DefaultAuthenticator("bradescodental@supersegurocorretora.com.br", "35jkg6w1"));
 //		email.setSSLOnConnect(true);
 		email.setSubject("Boleto de Pagamento, Sou Super Seguro Corretora");
 		
 		try {
-			email.setFrom("nao_responder@supersegurocorretora.com.br");
+			email.setFrom("bradescodental@supersegurocorretora.com.br");
 			
-			
-			email.setMsg("<!DOCTYPE html>"
+			email.setHtmlMsg("<!DOCTYPE html>"
 					+ "<html>"
 					+ "<head>"
 					+ "<meta charset='utf-8' />"
@@ -108,7 +106,7 @@ public class EnvioDeEmailImpl implements EnvioDeEmail {
 			
 					
 					email.addTo(cliente.getRecebidoSouSuperSeguroCobranca().getEmail());
-			
+					
 			email.attach(new ByteArrayDataSource(boleto.getPdfAsByteArray(), "application/pdf"),
 				      "boleto de: " + cliente.getRecebidoSouSuperSeguroCobranca().getNmCobr() + ".pdf", 
 				      "",

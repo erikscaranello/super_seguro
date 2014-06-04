@@ -64,7 +64,7 @@ public class TesteCronTab {
 					ftp.enterLocalPassiveMode();
 					
 					
-					ftp.changeWorkingDirectory("Homologacao");
+					ftp.changeWorkingDirectory("Producao");
 					ftp.changeWorkingDirectory("Enviados_Super_Seguro");
 					
 					String retornoArquivoMontado = montagemDeArquivo
@@ -95,13 +95,15 @@ public class TesteCronTab {
 					arquivoEnvioInsert.setDataArquivo(cal);
 					arquivoEnvioInsert.setNomeArquivo(nomeDoArquivo);
 
+					System.setProperty("file.encoding", "ISO-8859-1");
+					
 					try {
 
 						String nomeDoArquivoFinal = "SSCCD" + nomeDoArquivo
 								+ ".#01";
 
 						InputStream readerInputStream = new ByteArrayInputStream(
-								retornoArquivoMontado.getBytes());
+								retornoArquivoMontado.getBytes("ISO-8859-1"));
 
 						if (ftp.storeFile(nomeDoArquivoFinal, readerInputStream)) {
 

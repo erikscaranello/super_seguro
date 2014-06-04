@@ -12,9 +12,6 @@ import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -94,13 +91,15 @@ public class FtpClienteImpl {
 					arquivoEnvioInsert.setDataArquivo(cal);
 					arquivoEnvioInsert.setNomeArquivo(nomeDoArquivo);
 
+					System.setProperty("file.encoding", "ISO-8859-1");
+					
 					try {
 
 						String nomeDoArquivoFinal = "SSCCD" + nomeDoArquivo
 								+ ".#01";
 
 						InputStream readerInputStream = new ByteArrayInputStream(
-								retornoArquivoMontado.getBytes());
+								retornoArquivoMontado.getBytes("ISO-8859-1"));
 
 						if (ftp.storeFile(nomeDoArquivoFinal, readerInputStream)) {
 

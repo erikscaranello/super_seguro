@@ -1,5 +1,6 @@
 package br.com.sousuperseguro.utilImpl;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -502,7 +503,16 @@ public class MontagemDeArquivoImpl implements MontagemDeArquivo {
 			trailer = trailer + " ";
 		}
 	
-		return header + stringRetornoArquivo + trailer;
+		String retornoBytes = header + stringRetornoArquivo + trailer;
+//		String retorno = "";
+//		try {
+//			retorno = new String(retornoBytes.getBytes(),"ISO-8859-1");
+//		
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		} 
+		
+		return retornoBytes;
 	}
 
 	

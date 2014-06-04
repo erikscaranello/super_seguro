@@ -1,7 +1,6 @@
 package br.com.sousuperseguro.crontab;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,7 +11,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +56,7 @@ public class TesteRecebimentoCronTab {
 				ftp.enterLocalPassiveMode();
 				
 				
-				ftp.changeWorkingDirectory("Homologacao");
+				ftp.changeWorkingDirectory("Producao");
 				ftp.changeWorkingDirectory("Retorno_ODPV");
 				
 				

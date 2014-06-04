@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	
+	$("#escolhido").prop("checked", true);
+	
 	$("input[name='login']").bind("keyup blur",function(){
 		
 		var input = $(this);
@@ -19,10 +22,10 @@ $(document).ready(function(){
 		
 		$("input[name='role']").each(function(){
 			$(this).removeAttr("id");
-			$(this).checked = false;
+			$(this).prop("checked", false);
 		});
 		
-		$(escolhido).attr("id", "escolhido").prop("checked");
+		$(escolhido).attr("id", "escolhido").prop("checked", true);
 	});
 	
 	
@@ -166,11 +169,13 @@ function alterar(dom) {
 		
 		$("input[name='role']").each(function(){
 			$(this).removeAttr("id");
-			$(this).checked = false;
+			$(this).prop("checked", false);
 		});
-		
-		$("input[name='role']").val(retorno.role.authority).attr("id", "escolhido").prop("checked");
-		
+		if (retorno.role.authority == 'ROLE_ADMIN') {
+			$("input[value='ROLE_ADMIN']").attr("id", "escolhido").prop("checked", true);
+		} else {
+			$("input[value='ROLE_USER']").attr("id", "escolhido").prop("checked", true);
+		}		
 	});
 
 }

@@ -57,7 +57,7 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 			try {
 				InputStream inputStream = item.getInputStream();
 				HSSFWorkbook workBook = new HSSFWorkbook(inputStream);
-				HSSFSheet workSheet = workBook.getSheet("Relatorio");
+				HSSFSheet workSheet = workBook.getSheetAt(0);
 							
 				for (int i = 0; i < workSheet.getLastRowNum() + 1; i++) {
 					HSSFRow row = workSheet.getRow(i);
