@@ -71,8 +71,8 @@ public class TesteRecebimentoCronTab {
             			InputStreamReader isr = new InputStreamReader(is);
                 		BufferedReader br = new BufferedReader(isr);
                 	    
-                	    while (br.readLine() != null) {
-                	    	String linha = br.readLine();
+                		String linha = null;
+                		while ((linha = br.readLine()) != null) {
                 	    	leituraDeArquivo.lerLinha(linha);
                 	    }
                 	    

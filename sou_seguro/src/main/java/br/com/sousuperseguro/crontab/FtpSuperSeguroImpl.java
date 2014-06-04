@@ -29,7 +29,7 @@ public class FtpSuperSeguroImpl{
 	@Autowired
 	LeituraDeArquivo leituraDeArquivo;
 	
-	@Scheduled(cron="00 13 * * * *")
+	@Scheduled(cron="00 15 * * * *")
 	public void executar() {
 		
 		Date d = new Date();  
@@ -64,8 +64,8 @@ public class FtpSuperSeguroImpl{
             			InputStreamReader isr = new InputStreamReader(is);
                 		BufferedReader br = new BufferedReader(isr);
                 	    
-                	    while (br.readLine() != null) {
-                	    	String linha = br.readLine();
+                		String linha = null;
+                		while ((linha = br.readLine()) != null) {
                 	    	leituraDeArquivo.lerLinha(linha);
                 	    }
                 	    

@@ -20,6 +20,7 @@ public class LeituraDeArquivoImpl implements LeituraDeArquivo {
 	
 	@Override
 	public void lerLinha(String linha) {
+		System.out.println(linha.length());
 		if(linha != null) {
 			
 			if(! linha.substring(0, 0).equals("0") || ! linha.substring(0, 0).equals("9")) {

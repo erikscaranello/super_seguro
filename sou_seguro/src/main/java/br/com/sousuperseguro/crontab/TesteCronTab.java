@@ -94,7 +94,8 @@ public class TesteCronTab {
 
 					arquivoEnvioInsert.setDataArquivo(cal);
 					arquivoEnvioInsert.setNomeArquivo(nomeDoArquivo);
-
+					arquivoEnvioInsert.setRecebidoErro(false);
+					
 					System.setProperty("file.encoding", "ISO-8859-1");
 					
 					try {

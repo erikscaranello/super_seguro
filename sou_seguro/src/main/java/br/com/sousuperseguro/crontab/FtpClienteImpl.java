@@ -30,7 +30,7 @@ public class FtpClienteImpl {
 	@Autowired
 	ArquivosEnvioService arquivosEnvioService;
 	
-	@Scheduled(cron = "30 22 * * * *")
+	@Scheduled(cron = "00 12 * * * *")
 	public void executar() {		  
         
 		Date d = new Date();
@@ -90,7 +90,8 @@ public class FtpClienteImpl {
 
 					arquivoEnvioInsert.setDataArquivo(cal);
 					arquivoEnvioInsert.setNomeArquivo(nomeDoArquivo);
-
+					arquivoEnvioInsert.setRecebidoErro(false);
+					
 					System.setProperty("file.encoding", "ISO-8859-1");
 					
 					try {
