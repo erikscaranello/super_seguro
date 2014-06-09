@@ -112,7 +112,7 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 								e.printStackTrace();
 								
 								RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(retorno);
-													
+								
 								uploadDeArquivosRepository.insertDados(retornoRecusado);
 							}
 							
@@ -143,8 +143,21 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 			 * Coloco o número de proposta no dependente e mudo o valor do boleto do titular
 			 */
 			
-			dadoSemProposta.setNroProposta(dadosTitularDoSeguro.getNroProposta());
-			uploadDeArquivosRepository.insertDados(dadoSemProposta);
+			if(dadosTitularDoSeguro != null) {
+			
+				dadoSemProposta.setNroProposta(dadosTitularDoSeguro.getNroProposta());
+				uploadDeArquivosRepository.insertDados(dadoSemProposta);
+			
+				
+			} else {
+				
+				RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(dadoSemProposta);
+				
+				uploadDeArquivosRepository.insertDados(retornoRecusado);
+				uploadDeArquivosRepository.delete(dadoSemProposta);
+			}
+			
+			
 			
 //			if(dadosTitularDoSeguro.isEnvioEmail()) {
 //				
