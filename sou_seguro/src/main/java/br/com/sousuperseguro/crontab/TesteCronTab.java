@@ -64,8 +64,8 @@ public class TesteCronTab {
 					ftp.enterLocalPassiveMode();
 					
 					
-					ftp.changeWorkingDirectory("Producao");
-					ftp.changeWorkingDirectory("Enviados_Super_Seguro");
+//					ftp.changeWorkingDirectory("Producao");
+//					ftp.changeWorkingDirectory("Enviados_Super_Seguro");
 					
 					String retornoArquivoMontado = montagemDeArquivo
 							.montarArquivoDeEnvio(listaRecebidos);

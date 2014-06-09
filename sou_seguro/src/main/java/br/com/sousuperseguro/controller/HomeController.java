@@ -89,6 +89,11 @@ public class HomeController {
 			recebidoSouSuperSeguro.setNroProposta(request.getParameter("nroProposta"));	
 		}
 		
+		if(!request.getParameter("codigoErro").isEmpty()) {
+			recebidoSouSuperSeguro.setCodigoErro(request.getParameter("codigoErro"));	
+		}
+		
+		
 		recebidoSouSuperSeguro.setCdMatricula(request.getParameter("cdMatricula"));
 		
 		recebidoSouSuperSeguro.setcStatus(request.getParameter("cStatus").isEmpty() ? null : Status.valueOf(request.getParameter("cStatus")));
@@ -376,7 +381,6 @@ public class HomeController {
 		try {
 			response.sendRedirect("/sou_seguro");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -78,11 +78,10 @@ public class TesteRecebimentoCronTab {
                 	    
                 	    br.close();
                 	    isr.close();
-                	   
+                	    
+                	    arquivoRecebido.setRecebidoErro(true);
+                		arquivosEnvioService.updateArquivosParaLido(arquivoRecebido);
             		}
-            		
-            		arquivoRecebido.setRecebidoErro(true);
-            		arquivosEnvioService.updateArquivosParaLido(arquivoRecebido); 
                 }
                 
                 retorno = retorno + " Arquivo recebido";

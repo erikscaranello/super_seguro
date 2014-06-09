@@ -217,11 +217,16 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
     		Criteria criteria = this.session.createCriteria(Proposta.class); 
 			
 			criteria.add(Restrictions.eq("idRecebidoSouSuperSeguro", recebido));
+			criteria.addOrder(Order.desc("id"));
+			criteria.setMaxResults(1);
 			Proposta retornoProposta = (Proposta) criteria.uniqueResult();
     		
-    		
-    		session.delete(retornoProposta);
-    		session.delete(recebido); 
+			if(retornoProposta != null) {
+				session.delete(retornoProposta);
+			} else {
+				session.delete(recebido);
+			}
+			 
     		tx.commit();
     	
     	} catch (HibernateException e) {

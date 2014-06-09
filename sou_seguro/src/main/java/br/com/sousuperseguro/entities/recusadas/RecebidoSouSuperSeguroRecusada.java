@@ -191,7 +191,7 @@ public class RecebidoSouSuperSeguroRecusada implements Serializable{
 	@Column(name="recebido_bradesco", nullable=true)
 	private boolean recebidoBradesco;
 	
-	@Column(name="codigo_erro", nullable=true)
+	@Column(name="codigo_erro")
 	private String codigoErro;
 	
 	

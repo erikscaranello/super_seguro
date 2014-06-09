@@ -3,6 +3,7 @@ package br.com.sousuperseguro.entities;
 import java.io.Serializable;
 import java.math.BigInteger;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.engine.internal.Cascade;
 
 @Entity
 @Table(name="proposta")
@@ -29,7 +32,7 @@ public class Proposta implements Serializable{
 	@Column(name="proposta_pronta")
 	private String propostaPronta;
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
 	@JoinColumn(name = "id_recebido_sou_super_seguro", referencedColumnName = "id")
 	private RecebidoSouSuperSeguro idRecebidoSouSuperSeguro;
 	

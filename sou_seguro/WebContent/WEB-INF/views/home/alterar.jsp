@@ -27,7 +27,8 @@
 				
 				<input type="hidden" class="form-control obrigatorio" name="id" value="${arquivoRecusado.id}">
 				<input type="hidden" class="form-control obrigatorio" name="recebidoBradesco" value="${arquivoRecusado.recebidoBradesco}">
-				<input type="text" class="form-control obrigatorio" name="nroProposta" value="${arquivoRecusado.nroProposta}">
+				<input type="hidden" class="form-control obrigatorio" name="nroProposta" value="${arquivoRecusado.nroProposta}">
+				<input type="hidden" class="form-control obrigatorio" name="codigoErro" value="${arquivoRecusado.codigoErro}">
 					
 				<div class="form-group margin-um-por-cento margin-bottom-ajuste">
 				   	<p>Status</p>

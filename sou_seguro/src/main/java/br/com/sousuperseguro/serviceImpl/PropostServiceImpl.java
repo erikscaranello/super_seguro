@@ -2,6 +2,7 @@ package br.com.sousuperseguro.serviceImpl;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,7 @@ public class PropostServiceImpl implements PropostaService{
 		//Valor setado harded coded de acordo com a conta dada pelo Bradesco.
 		String  sigla = "SSC";
 		int contaSsc = 66;
-		
-		
+
 		String idPropostaString = novoIdProposta.toString();
 		
 		int tamanhodaString = idPropostaString.length();
@@ -50,11 +50,23 @@ public class PropostServiceImpl implements PropostaService{
 			arrayParaSoma.add(numeroDaProposta * stringNumeroDoisEum); 
 		}
 		
-		int numeroFinalNumeros = 0;
-		for(Integer soma : arrayParaSoma) {
-			numeroFinalNumeros = numeroFinalNumeros + soma;
+		
+		List<Integer> arrayCadadigito = new ArrayList<Integer>();
+		for(Integer numeroCompleto : arrayParaSoma) {
+			String numeroCompletoString = numeroCompleto.toString();
+			
+			for(int i = 0; i < numeroCompletoString.length(); i++ ) {
+				char stringCharDigito = numeroCompletoString.charAt(i);
+				String stringDigito = String.valueOf(stringCharDigito);
+				Integer digitoInteger = new Integer(stringDigito);
+				arrayCadadigito.add(digitoInteger);
+			}
 		}
 		
+		int numeroFinalNumeros = 0;
+		for(int soma : arrayCadadigito) {
+			numeroFinalNumeros = numeroFinalNumeros + soma;
+		}
 		
 		int numeroFinal = (contaSsc + numeroFinalNumeros);
 		
