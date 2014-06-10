@@ -296,5 +296,31 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
 			session.close();
 		}
 	}
+
+	@Override
+	public List<RecebidoSouSuperSeguro> obterListaRecebidosPorCpf(String cpf) {
+		this.session = criarConexao.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Criteria criteria = this.session.createCriteria(RecebidoSouSuperSeguro.class); 
+			
+			criteria.add(Restrictions.eq("cpf", cpf));
+			
+			@SuppressWarnings("unchecked")
+			List<RecebidoSouSuperSeguro> retorno = criteria.list();
+			
+			tx.commit();	
+			return retorno;
+		
+		} catch (HibernateException e) {
+			tx.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+		
+	}
 		
 }

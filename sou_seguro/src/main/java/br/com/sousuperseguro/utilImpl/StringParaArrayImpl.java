@@ -53,7 +53,18 @@ public class StringParaArrayImpl implements StringParaArray{
 						}
 					}
 					
-					if(	uploadDeArquivosRepository.obterRecebidoPorCpf(this.verificarCpf(linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", ""))) == null) {
+					if(	uploadDeArquivosRepository.obterRecebidoPorCpf(this.verificarCpf(linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", ""))) == null || linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", "").equals("00000000000")) {
+						
+						
+						//verificacao se este registro sem cpf já existe no banco de dados
+						for(RecebidoSouSuperSeguro recebidosSemCpf : uploadDeArquivosRepository.obterListaRecebidosPorCpf(  this.verificarCpf(linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", "")))) {
+							if(recebidosSemCpf.getNome().equals(linhaRecebida.getCell(3).getStringCellValue()) &&
+								(recebidosSemCpf.getNomeMae().equals(linhaRecebida.getCell(7).getStringCellValue()) &&
+									recebidosSemCpf.getRecebidoSouSuperSeguroCobranca().getCpfCobr().equals(this.verificarCpf(linhaRecebida.getCell(20).getStringCellValue().replace(".", "").replace("-", "")))	)	) {
+								return null;
+							}
+						}
+						
 						
 						
 						RecebidoSouSuperSeguro recebidoSouSuperSeguro = new RecebidoSouSuperSeguro();

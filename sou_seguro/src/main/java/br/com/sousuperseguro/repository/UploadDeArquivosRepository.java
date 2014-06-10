@@ -29,4 +29,6 @@ public interface UploadDeArquivosRepository {
 	List<RecebidoSouSuperSeguro> obterDadosSemProposta();
 	
 	List<RecebidoSouSuperSeguro> obterDadosNaoEnviadoCobrancaTitular();
+
+	List<RecebidoSouSuperSeguro> obterListaRecebidosPorCpf(String cpf);
 }
