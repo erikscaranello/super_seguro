@@ -270,7 +270,7 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 					try{
 						
 						uploadDeArquivosRepository.insertDados(retorno);
-					
+						uploadDeArquivosRepository.delete(retornoNovaEntidade);
 					} catch(Exception e) {
 						e.printStackTrace();
 						

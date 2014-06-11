@@ -327,7 +327,7 @@ public class StringParaArrayImpl implements StringParaArray{
 		recebido.setNome(retornoNovaEntidade.getNome());
 		recebido.setDtNascimento(retornoNovaEntidade.getDtNascimento());
 		recebido.setcSexo(retornoNovaEntidade.getcSexo());
-		recebido.setCpf(retornoNovaEntidade.getCpf());
+		recebido.setCpf(this.verificarCpf(retornoNovaEntidade.getCpf()));
 		recebido.setNomeMae(retornoNovaEntidade.getNomeMae());
 		recebido.setrLogradores(retornoNovaEntidade.getrLogradores());
 		recebido.setrNumeroRes(retornoNovaEntidade.getrNumeroRes());
@@ -369,7 +369,7 @@ public class StringParaArrayImpl implements StringParaArray{
 		RecebidoSouSuperSeguroCobranca cobranca = new RecebidoSouSuperSeguroCobranca();
 		cobranca.setNmCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getNmCobr());
 		cobranca.setDtNascCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getDtNascCobr());
-		cobranca.setCpfCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getCpfCobr());
+		cobranca.setCpfCobr(this.verificarCpf(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getCpfCobr()));
 		cobranca.setrLogradCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getrLogradCobr());
 		cobranca.setrNumeroCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getrNumeroCobr());
 		cobranca.setBairroCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroCobranca().getBairroCobr());	
@@ -406,7 +406,7 @@ public class StringParaArrayImpl implements StringParaArray{
 		mensalidade.setDvConta(retornoNovaEntidade.getRecebidoSouSuperSeguroPagamentoMensalidade().getDvConta());
 		mensalidade.setTpCobr(retornoNovaEntidade.getRecebidoSouSuperSeguroPagamentoMensalidade().getTpCobr());
 		mensalidade.setNmTitCorrente(retornoNovaEntidade.getRecebidoSouSuperSeguroPagamentoMensalidade().getNmTitCorrente());
-		mensalidade.setCpfTitCorrente(retornoNovaEntidade.getRecebidoSouSuperSeguroPagamentoMensalidade().getCpfTitCorrente());
+		mensalidade.setCpfTitCorrente(this.verificarCpf(retornoNovaEntidade.getRecebidoSouSuperSeguroPagamentoMensalidade().getCpfTitCorrente()));
 
 
 		mensalidade.setValor(retornoNovaEntidade.getRecebidoSouSuperSeguroPagamentoMensalidade().getValor());
