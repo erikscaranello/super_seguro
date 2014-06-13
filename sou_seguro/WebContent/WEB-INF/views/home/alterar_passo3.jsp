@@ -21,42 +21,43 @@
 				<h3 class="panel-title">Dados para pagamento</h3>
 			</div>
 			<div class="panel-body"> 
-				<div class="form-group margin-um-por-cento margin-bottom-ajuste">
-				   	<p>Banco</p>
-				   	<select name="nroBanco" class="form-control form-control obrigatorio">
-  						<option value="${arquivoRecusado.nroBanco}">${arquivoRecusado.nroBanco}</option>
-  						<option value="BRADESCO">BRADESCO</option>
-  						<option value="ITAU">ITAÚ</option>
-  						<option value="BANCO_DO_BRASIL">BANCO DO BRASIL</option>						
-					</select>	
-	
-				</div>
+				<c:if test="${principal.cCategoria == 'TITULAR'}">
+					<div class="form-group margin-um-por-cento margin-bottom-ajuste">
+					   	<p>Banco</p>
+					   	<select name="nroBanco" class="form-control form-control obrigatorio">
+	  						<option value="${arquivoRecusado.nroBanco}">${arquivoRecusado.nroBanco}</option>
+	  						<option value="BRADESCO">BRADESCO</option>
+	  						<option value="ITAU">ITAÚ</option>
+	  						<option value="BANCO_DO_BRASIL">BANCO DO BRASIL</option>						
+						</select>	
+		
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>Número da agência</p>
+					   	<input type="text" class="form-control obrigatorio" name="nroAgencia" value="${arquivoRecusado.nroAgencia}">
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>DV da agência</p>
+					   	<input type="text" class="form-control obrigatorio" name="dvAgencia" value="${arquivoRecusado.dvAgencia}">
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>Conta corrente</p>
+					   	<input type="text" class="form-control obrigatorio" name="cCorrente" value="${arquivoRecusado.cCorrente}">
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>DV da conta corrente</p>
+					   	<input type="text" class="form-control obrigatorio" name="dvConta" value="${arquivoRecusado.dvConta}">
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+					</div>
 				
-				<div class="form-group margin-um-por-cento">
-				   	<p>Número da agência</p>
-				   	<input type="text" class="form-control obrigatorio" name="nroAgencia" value="${arquivoRecusado.nroAgencia}">
-					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-				</div>
-				
-				<div class="form-group margin-um-por-cento">
-				   	<p>DV da agência</p>
-				   	<input type="text" class="form-control obrigatorio" name="dvAgencia" value="${arquivoRecusado.dvAgencia}">
-					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-				</div>
-				
-				<div class="form-group margin-um-por-cento">
-				   	<p>Conta corrente</p>
-				   	<input type="text" class="form-control obrigatorio" name="cCorrente" value="${arquivoRecusado.cCorrente}">
-					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-				</div>
-				
-				<div class="form-group margin-um-por-cento">
-				   	<p>DV da conta corrente</p>
-				   	<input type="text" class="form-control obrigatorio" name="dvConta" value="${arquivoRecusado.dvConta}">
-					<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-				</div>
-				
-				<div class="form-group margin-um-por-cento margin-bottom-ajuste">
+					<div class="form-group margin-um-por-cento margin-bottom-ajuste">
 				   	<p>Tipo de cobrança</p>
 				   	<select name="tpCobr" class="form-control form-control obrigatorio">
   						<option value="${arquivoRecusado.tpCobr}">${arquivoRecusado.tpCobr}</option>
@@ -64,6 +65,59 @@
   						<option value="BOLETOBANCARIO_CONTACORRENTE">BOLETO BANCARIO DEP. EM CONTA-CORRENTE</option>
  					</select>
 				</div>
+					
+				</c:if>
+				
+				
+				<c:if test="${principal.cCategoria == 'DEPENDENTES'}">
+					<div class="form-group margin-um-por-cento margin-bottom-ajuste">
+					   	<p>Banco</p>
+					   	<select name="nroBanco" class="form-control">
+	  						<option value="${arquivoRecusado.nroBanco}">${arquivoRecusado.nroBanco}</option>
+	  						<option value="BRADESCO">BRADESCO</option>
+	  						<option value="ITAU">ITAÚ</option>
+	  						<option value="BANCO_DO_BRASIL">BANCO DO BRASIL</option>						
+						</select>	
+		
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>Número da agência</p>
+					   	<input type="text" class="form-control" name="nroAgencia" value="${arquivoRecusado.nroAgencia}">
+						<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>DV da agência</p>
+					   	<input type="text" class="form-control" name="dvAgencia" value="${arquivoRecusado.dvAgencia}">
+						<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>Conta corrente</p>
+					   	<input type="text" class="form-control" name="cCorrente" value="${arquivoRecusado.cCorrente}">
+						<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+					</div>
+					
+					<div class="form-group margin-um-por-cento">
+					   	<p>DV da conta corrente</p>
+					   	<input type="text" class="form-control" name="dvConta" value="${arquivoRecusado.dvConta}">
+						<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+					</div>
+				
+					<div class="form-group margin-um-por-cento margin-bottom-ajuste">
+				   	<p>Tipo de cobrança</p>
+				   	<select name="tpCobr" class="form-control">
+  						<option value="${arquivoRecusado.tpCobr}">${arquivoRecusado.tpCobr}</option>
+  						<option value="BOLETOBANCARIO_BOLETOBANCARIO">BOLETO BANCARIO E BOLETO BANCARIO</option>
+  						<option value="BOLETOBANCARIO_CONTACORRENTE">BOLETO BANCARIO DEP. EM CONTA-CORRENTE</option>
+ 					</select>
+				</div>
+					
+				</c:if>
+				
+				
+				
 				
 				<div class="form-group margin-um-por-cento">
 				   	<p>Nome do titular da conta</p>
@@ -78,31 +132,60 @@
 				</div>
 				
 				
-				<div class="form-group margin-um-por-cento margin-bottom-ajuste">
-				   	<p>Parentesco</p>
-				   	<select name="cParentescoCobr" class="form-control form-control obrigatorio">
-  						<option value="${arquivoRecusado.cParentescoCobr}">${arquivoRecusado.cParentescoCobr}</option>
-  						<option value="PAI">PAI</option>
-  						<option value="MAE">MÃE</option>
-  						<option value="FILHA">FILHA</option>
-  						<option value="FILHO">FILHO</option>
-  						<option value="CONJUGE">CÔNJUGE</option>
-  						<option value="COMPANHEIRO">COMPANHEIRO</option>
-  						<option value="AGREGADO">AGREGADO</option>
-  						<option value="IRMAO">IRMÃO</option>
-  						<option value="IRMA">IRMÃ</option>
-  						<option value="SOBRINHO">SOBRINHO</option>
-  						<option value="NETO">NETO</option>
-  						<option value="AVO">AVO</option>
-  						<option value="TIO">TIO</option>
-  						<option value="SOGRO">SOGRO</option>
-  						<option value="SOGRA">SOGRA</option>
-  						<option value="CUNHADO">CUNHADO</option>
-  						<option value="TUTELADO">TUTELADO</option>
-  						<option value="OUTRO">OUTRO</option>
-					</select>			
-				</div>
+				<c:if test="${principal.cCategoria == 'TITULAR'}">
+					<div class="form-group margin-um-por-cento margin-bottom-ajuste">
+					   	<p>Parentesco</p>
+					   	<select name="cParentescoCobr" class="form-control">
+	  						<option value="${arquivoRecusado.cParentescoCobr}">${arquivoRecusado.cParentescoCobr}</option>
+	  						<option value="PAI">PAI</option>
+	  						<option value="MAE">MÃE</option>
+	  						<option value="FILHA">FILHA</option>
+	  						<option value="FILHO">FILHO</option>
+	  						<option value="CONJUGE">CÔNJUGE</option>
+	  						<option value="COMPANHEIRO">COMPANHEIRO</option>
+	  						<option value="AGREGADO">AGREGADO</option>
+	  						<option value="IRMAO">IRMÃO</option>
+	  						<option value="IRMA">IRMÃ</option>
+	  						<option value="SOBRINHO">SOBRINHO</option>
+	  						<option value="NETO">NETO</option>
+	  						<option value="AVO">AVO</option>
+	  						<option value="TIO">TIO</option>
+	  						<option value="SOGRO">SOGRO</option>
+	  						<option value="SOGRA">SOGRA</option>
+	  						<option value="CUNHADO">CUNHADO</option>
+	  						<option value="TUTELADO">TUTELADO</option>
+	  						<option value="OUTRO">OUTRO</option>
+						</select>			
+					</div>
+				</c:if>
 				
+				
+				<c:if test="${principal.cCategoria == 'DEPENDENTES'}">
+					<div class="form-group margin-um-por-cento margin-bottom-ajuste">
+					   	<p>Parentesco</p>
+					   	<select name="cParentescoCobr" class="form-control form-control obrigatorio">
+	  						<option value="${arquivoRecusado.cParentescoCobr}">${arquivoRecusado.cParentescoCobr}</option>
+	  						<option value="PAI">PAI</option>
+	  						<option value="MAE">MÃE</option>
+	  						<option value="FILHA">FILHA</option>
+	  						<option value="FILHO">FILHO</option>
+	  						<option value="CONJUGE">CÔNJUGE</option>
+	  						<option value="COMPANHEIRO">COMPANHEIRO</option>
+	  						<option value="AGREGADO">AGREGADO</option>
+	  						<option value="IRMAO">IRMÃO</option>
+	  						<option value="IRMA">IRMÃ</option>
+	  						<option value="SOBRINHO">SOBRINHO</option>
+	  						<option value="NETO">NETO</option>
+	  						<option value="AVO">AVO</option>
+	  						<option value="TIO">TIO</option>
+	  						<option value="SOGRO">SOGRO</option>
+	  						<option value="SOGRA">SOGRA</option>
+	  						<option value="CUNHADO">CUNHADO</option>
+	  						<option value="TUTELADO">TUTELADO</option>
+	  						<option value="OUTRO">OUTRO</option>
+						</select>			
+					</div>
+				</c:if>	
 				<div class="form-group cem-por-cento para-direita">
 				   	<input type="button" onclick="enviarForm()" class="form-control vinte-por-cento fundo-verde" name="enviar" value="enviar">
 				</div>	

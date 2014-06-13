@@ -338,6 +338,7 @@ public class HomeController {
 		
 		modelAndView.addObject("idPai", retornoNovaEntidade.getId());
 		modelAndView.addObject("arquivoRecusado", retornoNovaEntidade.getRecebidoSouSuperSeguroPagamentoMensalidade());
+		modelAndView.addObject("principal", retornoNovaEntidade);
 		return modelAndView;
 	}
 	
