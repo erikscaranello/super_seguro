@@ -22,7 +22,7 @@ public class LeituraDeArquivoImpl implements LeituraDeArquivo {
 	public void lerLinha(String linha) {
 		if(linha != null) {
 			
-			if(! linha.substring(0, 0).equals("0") || ! linha.substring(0, 0).equals("9")) {
+			if(! linha.substring(0, 1).equals("0") && ! linha.substring(0, 1).equals("9")) {
 				
 				if(!linha.substring(147, 151).equals("0000")) {
 					String cpf = linha.substring(127, 138);
@@ -37,11 +37,6 @@ public class LeituraDeArquivoImpl implements LeituraDeArquivo {
 						uploadDeArquivosRepository.insertDados(recebidoRecusado);
 					}
 				}
-				
-							
-				
-				
-				
 			}
 		} 
 	}

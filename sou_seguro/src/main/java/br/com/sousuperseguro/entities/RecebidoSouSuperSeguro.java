@@ -159,7 +159,7 @@ public class RecebidoSouSuperSeguro implements Serializable{
 	@Column(name="c_fone2", nullable=true, length=20)
 	private String cFone3;
 	
-	@Column(name="email", nullable=false, length=50)
+	@Column(name="email", nullable=true, length=50)
 	private String email;
 	
 	@Column(name="c_plano", nullable=true, length=9)

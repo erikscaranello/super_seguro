@@ -93,7 +93,7 @@ public class TesteRecebimentoCronTab {
             }
 			
 		} catch (SocketException e) {
-			 retorno = retorno + " Socket exception";
+			 retorno = retorno + " Socket exception " + e.getMessage();
 			
 			e.printStackTrace();
 		} catch (IOException e) {

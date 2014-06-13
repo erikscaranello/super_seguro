@@ -320,7 +320,8 @@ public class StringParaArrayImpl implements StringParaArray{
 	public RecebidoSouSuperSeguro paraCorretos(RecebidoSouSuperSeguroRecusada retornoNovaEntidade) {
 			
 		RecebidoSouSuperSeguro recebido = new RecebidoSouSuperSeguro();
-		recebido.setContrato(retornoNovaEntidade.getContrato());
+		
+		recebido.setContrato("057946");
 		recebido.setcStatus(retornoNovaEntidade.getcStatus());
 		recebido.setcCategoria(retornoNovaEntidade.getcCategoria());
 		recebido.setcParentesco(retornoNovaEntidade.getcParentesco());
