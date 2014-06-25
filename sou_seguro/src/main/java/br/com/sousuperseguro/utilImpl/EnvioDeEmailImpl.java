@@ -104,9 +104,9 @@ public class EnvioDeEmailImpl implements EnvioDeEmail {
 					+ "<p>Atenciosamente,</p>");
 			
 			
-					
+//					email.addTo("erikscaranello@gmail.com");
 					email.addTo(cliente.getRecebidoSouSuperSeguroCobranca().getEmail());
-					
+					email.addBcc("anapaula.martins@supersegurocorretora.com.br");
 			email.attach(new ByteArrayDataSource(boleto.getPdfAsByteArray(), "application/pdf"),
 				      "boleto de: " + cliente.getRecebidoSouSuperSeguroCobranca().getNmCobr() + ".pdf", 
 				      "",

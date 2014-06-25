@@ -13,11 +13,21 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.maskedinput-1.1.4.pack.js" />"></script>
 	
 	<form class="form-inline" name="formulario" method="post" action="<c:url value="/receber_alterar_dados" />">
-	
+		
+		<c:if test="${arquivoRecusado.codigoErro != null && arquivoRecusado.codigoErro != ''}">
+			<div class="panel panel-danger setenta-por-cento">
+				<div class="form-group margin-um-por-cento margin-bottom-ajuste">
+				   	<h3>Erro retornado pelo Bradesco</h3>
+					<p>${erroRetorno.descricao}</p>				 
+				</div>
+			</div>	
+		</c:if>
+		
 		<div class="panel panel-success setenta-por-cento">
 			<div class="panel-heading">
 				<h3 class="panel-title">Movimentação de Associados</h3>
 			</div>
+			
 			<div class="panel-body"> 
 <!-- 				<div class="form-group margin-um-por-cento"> -->
 <!-- 				   	<p>Contrato</p> -->
@@ -29,7 +39,7 @@
 				<input type="hidden" class="form-control obrigatorio" name="recebidoBradesco" value="${arquivoRecusado.recebidoBradesco}">
 				<input type="hidden" class="form-control obrigatorio" name="nroProposta" value="${arquivoRecusado.nroProposta}">
 				<input type="hidden" class="form-control obrigatorio" name="codigoErro" value="${arquivoRecusado.codigoErro}">
-					
+				
 				<div class="form-group margin-um-por-cento margin-bottom-ajuste">
 				   	<p>Status</p>
 					<select name="cStatus" class="form-control form-control obrigatorio">

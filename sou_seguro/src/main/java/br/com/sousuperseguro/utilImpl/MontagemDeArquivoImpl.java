@@ -1,6 +1,5 @@
 package br.com.sousuperseguro.utilImpl;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

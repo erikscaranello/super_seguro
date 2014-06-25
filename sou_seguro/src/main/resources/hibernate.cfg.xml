@@ -15,7 +15,7 @@
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.connection.password">design0506</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.show_sql">false</property>
   
   <property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
 <!--   <property name="hibernate.c3p0.validate">true</property> -->
@@ -26,13 +26,13 @@
   <property name="hibernate.c3p0.max_statements">0</property> 
   <property name="hibernate.c3p0.min_size">2</property> 
   <property name="hibernate.c3p0.timeout">100</property>
-		
-		
+				
   <mapping class="br.com.sousuperseguro.entities.Users"/>
   <mapping class="br.com.sousuperseguro.entities.ArquivosEnvio"/>
   <mapping class="br.com.sousuperseguro.entities.InfosPessoais"/>
   <mapping class="br.com.sousuperseguro.entities.Role"/>
   <mapping class="br.com.sousuperseguro.entities.Proposta"/>
+  <mapping class="br.com.sousuperseguro.entities.ErrosRetorno"/>
   <mapping class="br.com.sousuperseguro.entities.NumeroDocumento"/>
   <mapping class="br.com.sousuperseguro.entities.RecebidoSouSuperSeguro"/>
   <mapping class="br.com.sousuperseguro.entities.RecebidoSouSuperSeguroCobranca"/>

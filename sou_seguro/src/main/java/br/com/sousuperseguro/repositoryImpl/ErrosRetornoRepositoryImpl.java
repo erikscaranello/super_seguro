@@ -1,7 +1,5 @@
 package br.com.sousuperseguro.repositoryImpl;
 
-import java.math.BigInteger;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,31 +8,33 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.sousuperseguro.connection.CriarConexao;
-import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroRecusada;
-import br.com.sousuperseguro.repository.HomeRepository;
+import br.com.sousuperseguro.entities.ErrosRetorno;
+import br.com.sousuperseguro.repository.ErrosRetornoRepository;
 
 @Repository
-public class HomeRepositoryImpl implements HomeRepository {
+public class ErrosRetornoRepositoryImpl implements ErrosRetornoRepository{
 	
 	private CriarConexao criarConexao;
 	private Session session;
 	
-	public HomeRepositoryImpl() {
+	public ErrosRetornoRepositoryImpl() {
     	criarConexao = new CriarConexao();
  	}
 	
-	
 	@Override
-	public RecebidoSouSuperSeguroRecusada selecionarRecebidoRecusadoPorId(BigInteger id) {
-	
+	public ErrosRetorno obterErro(String codigoErro) {
+		
 		this.session = criarConexao.getSession();
 		Transaction tx = null;
 		
 		try {
 			tx = session.beginTransaction();
-			Criteria criteria = this.session.createCriteria(RecebidoSouSuperSeguroRecusada.class); 
-			criteria.add(Restrictions.eq("id", id));
-			RecebidoSouSuperSeguroRecusada retorno = (RecebidoSouSuperSeguroRecusada) criteria.uniqueResult();
+			
+			Criteria criteria = this.session.createCriteria(ErrosRetorno.class); 
+			criteria.add(Restrictions.eq("numeroErro", codigoErro));
+			criteria.setMaxResults(1);
+			
+			ErrosRetorno retorno = (ErrosRetorno) criteria.uniqueResult();
 			
 			tx.commit();
 			
@@ -45,7 +45,7 @@ public class HomeRepositoryImpl implements HomeRepository {
 		} finally {
 			session.close();
 		}
-	
+		
 	}
-	
+
 }

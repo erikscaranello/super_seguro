@@ -18,6 +18,7 @@ import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroRecusada;
 import br.com.sousuperseguro.repository.PropostaRepository;
 import br.com.sousuperseguro.repository.UploadDeArquivosRepository;
+import br.com.sousuperseguro.service.NumeroDocumentoService;
 import br.com.sousuperseguro.service.PropostaService;
 import br.com.sousuperseguro.util.BoletoBancario;
 import br.com.sousuperseguro.util.EnvioDeEmail;
@@ -27,6 +28,9 @@ import br.com.sousuperseguro.util.UploadArquivosUtil;
 
 @Component
 public class UploadArquivosUtilImpl implements UploadArquivosUtil {
+	
+	@Autowired
+	NumeroDocumentoService numeroDocumentoService;
 	
 	@Autowired
 	StringParaArray stringParaArray;
@@ -182,7 +186,11 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 		List<RecebidoSouSuperSeguro> listaNaoEnviadaEmail = uploadDeArquivosRepository.obterDadosNaoEnviadoCobrancaTitular();
 		
 		for(RecebidoSouSuperSeguro dadosRecebidoEmailNaoEnviado : listaNaoEnviadaEmail) {
-			this.enviarEmail(dadosRecebidoEmailNaoEnviado);
+			if(numeroDocumentoService.verificarEnviadoEmail(dadosRecebidoEmailNaoEnviado) == null) {
+				this.enviarEmail(dadosRecebidoEmailNaoEnviado);
+			}
+			
+			
 		}
 		
 	}

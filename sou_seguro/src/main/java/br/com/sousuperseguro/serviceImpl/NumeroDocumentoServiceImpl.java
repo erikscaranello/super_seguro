@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.sousuperseguro.entities.NumeroDocumento;
+import br.com.sousuperseguro.entities.RecebidoSouSuperSeguro;
 import br.com.sousuperseguro.repository.NumeroDocumentoRepository;
 import br.com.sousuperseguro.service.NumeroDocumentoService;
 
@@ -24,6 +25,12 @@ public class NumeroDocumentoServiceImpl implements NumeroDocumentoService{
 	@Override
 	public void insertNumeroDocumento(NumeroDocumento numeroDocumento) {
 		numeroDocumentoRepository.insertNumeroDocumento(numeroDocumento);
+	}
+
+
+	@Override
+	public NumeroDocumento verificarEnviadoEmail(RecebidoSouSuperSeguro dadosRecebidoEmailNaoEnviado) {
+		return numeroDocumentoRepository.verificarEnviadoEmail(dadosRecebidoEmailNaoEnviado);
 	}
 
 }

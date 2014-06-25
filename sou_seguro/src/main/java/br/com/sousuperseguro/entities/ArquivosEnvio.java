@@ -30,7 +30,7 @@ public class ArquivosEnvio implements Serializable {
 	@Column(name="data_arquivo")
 	private Calendar dataArquivo;
 	
-	@Column(name="recebido_erro")
+	@Column(name="recebido_erro", columnDefinition="char(4)")
 	private boolean recebidoErro;
 	
 	

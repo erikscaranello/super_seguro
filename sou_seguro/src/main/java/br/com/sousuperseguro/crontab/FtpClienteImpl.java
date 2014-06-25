@@ -51,6 +51,7 @@ public class FtpClienteImpl {
 				
 				
 				ftp.changeWorkingDirectory("Producao");
+//				ftp.changeWorkingDirectory("Homologacao");
 				ftp.changeWorkingDirectory("Retorno_ODPV");
 				
 				

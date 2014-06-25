@@ -63,7 +63,7 @@ public class TesteCronTab {
 //					ftp.enterRemotePassiveMode();
 					ftp.enterLocalPassiveMode();
 					
-					
+//					ftp.changeWorkingDirectory("Producao");
 					ftp.changeWorkingDirectory("Homologacao");
 					ftp.changeWorkingDirectory("Enviados_Super_Seguro");
 					

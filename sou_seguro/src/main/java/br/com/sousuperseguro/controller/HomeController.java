@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.sousuperseguro.entities.ErrosRetorno;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroCobrancaRecusada;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroPagamentoMensalidadeRecusada;
 import br.com.sousuperseguro.entities.recusadas.RecebidoSouSuperSeguroRecusada;
@@ -29,6 +30,7 @@ import br.com.sousuperseguro.enums.Sexo;
 import br.com.sousuperseguro.enums.Status;
 import br.com.sousuperseguro.enums.TipoCobranca;
 import br.com.sousuperseguro.service.ArquivosRecusadosService;
+import br.com.sousuperseguro.service.ErrosRetornoService;
 import br.com.sousuperseguro.service.HomeService;
 import br.com.sousuperseguro.service.Sessoes;
 import br.com.sousuperseguro.service.UploadDeArquivosService;
@@ -39,6 +41,9 @@ public class HomeController {
 	
 	@Autowired
 	private HomeService homeService;
+	
+	@Autowired
+	private ErrosRetornoService errosRetornoService;
 	
 	@Autowired
 	private Sessoes sessoes;
@@ -69,7 +74,17 @@ public class HomeController {
 			
 		ModelAndView modelAndView = new ModelAndView("home/alterar");
 		
-		modelAndView.addObject("arquivoRecusado", arquivosRecusadosService.obterArquivoRecusado(numeroDados));
+		RecebidoSouSuperSeguroRecusada arquivoRecusado = arquivosRecusadosService.obterArquivoRecusado(numeroDados);
+		
+		if (arquivoRecusado != null ) {
+			if(arquivoRecusado.getCodigoErro() != null && !arquivoRecusado.getCodigoErro().isEmpty()) {
+				ErrosRetorno erro = errosRetornoService.obterErro(arquivoRecusado.getCodigoErro());
+				modelAndView.addObject("erroRetorno", erro);
+			}
+		}
+		
+		modelAndView.addObject("arquivoRecusado", arquivoRecusado);
+		
 		return modelAndView;
 	}
 	
@@ -83,7 +98,7 @@ public class HomeController {
 			recebidoSouSuperSeguro.setId(new BigInteger(request.getParameter("id")));
 		} 
 		
-		recebidoSouSuperSeguro.setContrato(request.getParameter("contrato"));
+		recebidoSouSuperSeguro.setContrato("057946");
 		
 		if(!request.getParameter("nroProposta").isEmpty()) {
 			recebidoSouSuperSeguro.setNroProposta(request.getParameter("nroProposta"));	
@@ -96,7 +111,12 @@ public class HomeController {
 		
 		recebidoSouSuperSeguro.setCdMatricula(request.getParameter("cdMatricula"));
 		
-		recebidoSouSuperSeguro.setcStatus(request.getParameter("cStatus").isEmpty() ? null : Status.valueOf(request.getParameter("cStatus")));
+		if(Boolean.parseBoolean(request.getParameter("recebidoBradesco")) == true) {
+			recebidoSouSuperSeguro.setcStatus(Status.A);
+		} else {
+			recebidoSouSuperSeguro.setcStatus(request.getParameter("cStatus").isEmpty() ? null : Status.valueOf(request.getParameter("cStatus")));
+		}
+		
 		recebidoSouSuperSeguro.setcCategoria(request.getParameter("cCategoria").isEmpty() ? null : Categoria.valueOf(request.getParameter("cCategoria")));
 		recebidoSouSuperSeguro.setcParentesco(request.getParameter("cParentesco").isEmpty() ? null : Parentesco.valueOf(request.getParameter("cParentesco")));
 		recebidoSouSuperSeguro.setNome(request.getParameter("nome").isEmpty() ? null : request.getParameter("nome"));
