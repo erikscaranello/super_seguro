@@ -39,7 +39,7 @@ public class BoletoBancarioImpl implements BoletoBancario {
 	@Autowired
 	NumeroDocumentoService numeroDocumentoService;
 	
-	static final private String NUMERO_CARTEIRA = "06";
+	static final private String NUMERO_CARTEIRA = "09";
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -96,7 +96,7 @@ public class BoletoBancarioImpl implements BoletoBancario {
 		
 		titulo.setNumeroDoDocumento(idNumeroDocumento);
 		
-		String[] arrayNossoNumero = nossoNumero.gerarNossoNumero(idProposta, "06");
+		String[] arrayNossoNumero = nossoNumero.gerarNossoNumero(idProposta, NUMERO_CARTEIRA);
 		
 
 		
