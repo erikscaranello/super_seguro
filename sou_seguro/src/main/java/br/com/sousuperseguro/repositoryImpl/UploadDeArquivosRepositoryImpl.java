@@ -280,6 +280,7 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
 			
 //			criteria.add(Restrictions.eq("envioEmail", false));
 			criteria.add(Restrictions.eq("cCategoria", Categoria.TITULAR));
+			criteria.add(Restrictions.eq("emailEnviado", false));
 			
 			criteria.createAlias("recebidoSouSuperSeguroPagamentoMensalidade", "recebido");
 			

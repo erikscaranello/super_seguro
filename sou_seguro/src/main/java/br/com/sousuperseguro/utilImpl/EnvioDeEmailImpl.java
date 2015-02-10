@@ -112,6 +112,11 @@ public class EnvioDeEmailImpl implements EnvioDeEmail {
 				      "",
 				       EmailAttachment.ATTACHMENT);
 			email.send();
+			
+			
+			cliente.setEmailEnviado(true);
+			
+			
 		} catch (EmailException e) {
 			e.printStackTrace();
 		}		

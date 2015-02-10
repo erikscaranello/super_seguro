@@ -189,6 +189,9 @@ public class RecebidoSouSuperSeguro implements Serializable{
 	
 	private boolean enviado;
 	
+	@Column(name = "email_enviado", nullable = true)
+	private boolean emailEnviado;
+	
 	
 	public BigInteger getId() {
 		return id;
@@ -583,5 +586,13 @@ public class RecebidoSouSuperSeguro implements Serializable{
 
 	public void setEnviado(boolean enviado) {
 		this.enviado = enviado;
+	}
+
+	public boolean isEmailEnviado() {
+		return emailEnviado;
+	}
+
+	public void setEmailEnviado(boolean emailEnviado) {
+		this.emailEnviado = emailEnviado;
 	}
 }

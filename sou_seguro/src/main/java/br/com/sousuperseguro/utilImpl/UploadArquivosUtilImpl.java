@@ -186,13 +186,13 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 		List<RecebidoSouSuperSeguro> listaNaoEnviadaEmail = uploadDeArquivosRepository.obterDadosNaoEnviadoCobrancaTitular();
 		
 		for(RecebidoSouSuperSeguro dadosRecebidoEmailNaoEnviado : listaNaoEnviadaEmail) {
+			
+//			int resultado = dadosRecebidoEmailNaoEnviado.getId().compareTo(new BigInteger("376"));
+			
 			if(numeroDocumentoService.verificarEnviadoEmail(dadosRecebidoEmailNaoEnviado) == null) {
 				this.enviarEmail(dadosRecebidoEmailNaoEnviado);
 			}
-			
-			
 		}
-		
 	}
 	
 	

@@ -56,8 +56,8 @@ public class TesteRecebimentoCronTab {
 				ftp.enterLocalPassiveMode();
 				
 				
-//				ftp.changeWorkingDirectory("Producao");
-				ftp.changeWorkingDirectory("Homologacao");
+				ftp.changeWorkingDirectory("Producao");
+//				ftp.changeWorkingDirectory("Homologacao");
 				ftp.changeWorkingDirectory("Retorno_ODPV");
 				
 				
