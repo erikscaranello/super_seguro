@@ -29,7 +29,7 @@ public class FtpClienteImpl {
 	@Autowired
 	LeituraDeArquivo leituraDeArquivo;
 	
-	@Scheduled(cron = "00 12 * * * *")
+	@Scheduled(cron = "0 0 12 * * *")
 	public void executar() {		  
         
 		

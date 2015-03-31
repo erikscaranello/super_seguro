@@ -160,61 +160,17 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 				uploadDeArquivosRepository.insertDados(retornoRecusado);
 				uploadDeArquivosRepository.delete(dadoSemProposta);
 			}
-			
-			
-			
-//			if(dadosTitularDoSeguro.isEnvioEmail()) {
-//				
-//				this.enviarEmail(dadoSemProposta);
-//					
-//			} else {
-//				BigDecimal valorSemProposta = dadoSemProposta.getRecebidoSouSuperSeguroPagamentoMensalidade().getValor();
-//				dadosTitularDoSeguro.getRecebidoSouSuperSeguroPagamentoMensalidade().setValor(
-//						valorSemProposta.add(
-//								dadosTitularDoSeguro.getRecebidoSouSuperSeguroPagamentoMensalidade().getValor()));
-//				
-//				uploadDeArquivosRepository.insertDados(dadosTitularDoSeguro);	
-//			}
-	
+				
 		}
 	
-		this.verificarListaDeNaoEnviados();
+//		this.verificarListaDeNaoEnviados();
+	/*
+	 * metodo movido para cron
+	 */
 	}
 	
 	
-	private void verificarListaDeNaoEnviados() {
-		List<RecebidoSouSuperSeguro> listaNaoEnviadaEmail = uploadDeArquivosRepository.obterDadosNaoEnviadoCobrancaTitular();
-		
-		for(RecebidoSouSuperSeguro dadosRecebidoEmailNaoEnviado : listaNaoEnviadaEmail) {
-			
-//			int resultado = dadosRecebidoEmailNaoEnviado.getId().compareTo(new BigInteger("376"));
-			
-			if(numeroDocumentoService.verificarEnviadoEmail(dadosRecebidoEmailNaoEnviado) == null) {
-				this.enviarEmail(dadosRecebidoEmailNaoEnviado);
-			}
-		}
-	}
 	
-	
-	private void enviarEmail(RecebidoSouSuperSeguro dados) {
-			
-		Proposta proposta = propostaRepository.obterPropostaPorRecebidoSuperSeguro(dados);
-		
-//		if (proposta == null) {
-//			proposta = propostaRepository.obterPropostaPorNumeroDeProposta(dados.getNroProposta());
-//		}
-		
-		BoletoViewer boleto = boletoBancario.gerarBoleto(dados, proposta.getId());
-		
-		try{
-			envioDeEmail.enviarEmailComBoleto(dados, boleto);
-//			dados.setEnvioEmail(true);
-			uploadDeArquivosRepository.insertDados(dados);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-	}
-
 
 	@Override
 	public void fazerUpload(RecebidoSouSuperSeguroRecusada retornoNovaEntidade) {

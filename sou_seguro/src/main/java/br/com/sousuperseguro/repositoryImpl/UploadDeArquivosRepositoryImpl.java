@@ -285,6 +285,8 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
 			criteria.createAlias("recebidoSouSuperSeguroPagamentoMensalidade", "recebido");
 			
 			criteria.add(Restrictions.eq("recebido.tpCobr", TipoCobranca.BOLETOBANCARIO_BOLETOBANCARIO));
+			criteria.setMaxResults(50);
+			
 			List<RecebidoSouSuperSeguro> retorno = criteria.list();
 			
 			tx.commit();	
