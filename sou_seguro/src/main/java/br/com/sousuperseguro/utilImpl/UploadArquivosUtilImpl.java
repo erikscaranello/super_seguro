@@ -124,11 +124,6 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 					}
 				}
 				
-				
-				this.mesclaDeDados();
-				
-				
-				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}			
@@ -136,42 +131,6 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 	}
 
 	
-	private void mesclaDeDados() {
-		List<RecebidoSouSuperSeguro> listaRecebidosSemProposta = uploadDeArquivosRepository.obterDadosSemProposta();
-		
-		for(RecebidoSouSuperSeguro dadoSemProposta: listaRecebidosSemProposta) {
-			
-			RecebidoSouSuperSeguro dadosTitularDoSeguro = uploadDeArquivosRepository.obterRecebidoPorCpf(dadoSemProposta.getRecebidoSouSuperSeguroCobranca().getCpfCobr());
-			
-			/* Aqui mesclo os dados do titular com dependente. 
-			 * Coloco o número de proposta no dependente e mudo o valor do boleto do titular
-			 */
-			
-			if(dadosTitularDoSeguro != null) {
-			
-				dadoSemProposta.setNroProposta(dadosTitularDoSeguro.getNroProposta());
-				uploadDeArquivosRepository.insertDados(dadoSemProposta);
-			
-				
-			} else {
-				
-				RecebidoSouSuperSeguroRecusada retornoRecusado = stringParaArray.paraRecusados(dadoSemProposta);
-				
-				uploadDeArquivosRepository.insertDados(retornoRecusado);
-				uploadDeArquivosRepository.delete(dadoSemProposta);
-			}
-				
-		}
-	
-//		this.verificarListaDeNaoEnviados();
-	/*
-	 * metodo movido para cron
-	 */
-	}
-	
-	
-	
-
 	@Override
 	public void fazerUpload(RecebidoSouSuperSeguroRecusada retornoNovaEntidade) {
 		
@@ -245,8 +204,6 @@ public class UploadArquivosUtilImpl implements UploadArquivosUtil {
 					
 				}
 			}
-			
-			this.mesclaDeDados();
 			
 		}
 	}

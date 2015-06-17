@@ -280,9 +280,14 @@ public class UploadDeArquivosRepositoryImpl implements UploadDeArquivosRepositor
 			
 //			criteria.add(Restrictions.eq("envioEmail", false));
 			criteria.add(Restrictions.eq("cCategoria", Categoria.TITULAR));
-			criteria.add(Restrictions.eq("emailEnviado", false));
 			
+			criteria.add(Restrictions.or(Restrictions.and(Restrictions.isNotNull("emailEnviado"), Restrictions.eq("emailEnviado", false)), Restrictions.isNull("emailEnviado")));
+						
 			criteria.createAlias("recebidoSouSuperSeguroPagamentoMensalidade", "recebido");
+			
+//			criteria.add(Restrictions.like("nome", "PAULO CESAR DIAS PEREIRA"));
+			criteria.addOrder(Order.asc("id"));
+			
 			
 			criteria.add(Restrictions.eq("recebido.tpCobr", TipoCobranca.BOLETOBANCARIO_BOLETOBANCARIO));
 			criteria.setMaxResults(30);

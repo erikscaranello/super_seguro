@@ -56,7 +56,7 @@ public class StringParaArrayImpl implements StringParaArray{
 					if(	uploadDeArquivosRepository.obterRecebidoPorCpf(this.verificarCpf(linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", ""))) == null || linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", "").equals("00000000000")) {
 						
 						
-						//verificacao se este registro sem cpf já existe no banco de dados
+						//verificacao se este registro sem cpf ja existe no banco de dados
 						for(RecebidoSouSuperSeguro recebidosSemCpf : uploadDeArquivosRepository.obterListaRecebidosPorCpf(  this.verificarCpf(linhaRecebida.getCell(6).getStringCellValue().replace(".", "").replace("-", "")))) {
 							if(recebidosSemCpf.getNome().equals(linhaRecebida.getCell(3).getStringCellValue()) &&
 								(recebidosSemCpf.getNomeMae().equals(linhaRecebida.getCell(7).getStringCellValue()) &&

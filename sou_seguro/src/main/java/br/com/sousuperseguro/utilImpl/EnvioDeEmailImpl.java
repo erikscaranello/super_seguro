@@ -89,24 +89,25 @@ public class EnvioDeEmailImpl implements EnvioDeEmail {
 					+ "<body>"
 					+ "<p>Sr(a) " + cliente.getNome() + "</p>"
 					+ "<p>Numero da Proposta: " + cliente.getNroProposta() + "</p>"
-					+ "<p>Parabéns!!  Você acaba de contratar o Plano Bradesco Dental Ideal.</p>"
-					+ "<p>Após o pagamento da primeira parcela, você já poderá utilizar o atendimento de urgência e emergência, para as demais coberturas não deixe de acessar o link abaixo e consultar a íntegra das Condições Gerais do seu plano.</p>"
+					+ "<p>ParabÃ©ns!!  VocÃª acaba de contratar o Plano Bradesco Dental Ideal.</p>"
+					+ "<p>ApÃ³s o pagamento da primeira parcela, vocÃª jÃ¡ poderÃ¡ utilizar o atendimento de urgÃªncia e emergÃªncia, para as demais coberturas nÃ£o deixe de acessar o link abaixo e consultar as CondiÃ§Ãµes Gerais do seu plano.</p>"
 					+ "<p><a href='http://portal.bradescodental.com.br/bdpf/pdf/welcome_kit_miolo_rev02_me_virtual.pdf'>http://portal.bradescodental.com.br/bdpf/pdf/welcome_kit_miolo_rev02_me_virtual.pdf</a></p>"
-					+ "<p>Não deixe de acessar também o portal <a href='http://www.bradescodental.com.br'>bradescodental.com.br</a> e usufrua dos inúmeros benefícios disponibilizados:</p>"
+					+ "<p>NÃ£o deixe de acessar tambÃ©m o portal<a href='http://www.bradescodental.com.br'>bradescodental.com.br</a> e usufrua dos inÃºmeros benefÃ­cios disponibilizados:</p>"
 					
 					+ "<p><ul>"
 					+ "<li>Consulta de Rede Credenciada;</li>"
-					+ "<li>Consulta às condições gerais do plano contratado e procedimentos cobertos;</li>"
-					+ "<li>Acompanhamento do tratamento da sua família;</li>"
+					+ "<li>Consulta ï¿½s condiÃ§Ãµes gerais do plano contratado e procedimentos cobertos;</li>"
+					+ "<li>Acompanhamento do tratamento da sua famÃ­lia;</li>"
 					+ "<li>Informativo de Imposto de Renda;</li>"
 					+ "</ul></p>"
-					+ "<p>Em caso de dúvidas sobre seu plano ligue para Central de Relacionamento com o cliente 4004-2700 ( Capitais e Regiões Metropolitana ) ou 0800 701 2700 ( Demais Localidades )</p>"
+					+ "<p>Em caso de dÃºvidas sobre seu plano ligue para Central de Relacionamento com o cliente 4004-2700 ( Capitais e RegiÃµes Metropolitana ) ou 0800 701 2700 ( Demais Localidades )</p>"
 					+ "<p>Atenciosamente,</p>");
 			
 			
 //					email.addTo("erikscaranello@gmail.com");
 					email.addTo(cliente.getRecebidoSouSuperSeguroCobranca().getEmail());
-					email.addBcc("anapaula.martins@supersegurocorretora.com.br");
+//					email.addBcc("anapaula.martins@supersegurocorretora.com.br");
+					email.addBcc("thiago@supersegurocorretora.com.br");
 			email.attach(new ByteArrayDataSource(boleto.getPdfAsByteArray(), "application/pdf"),
 				      "boleto de: " + cliente.getRecebidoSouSuperSeguroCobranca().getNmCobr() + ".pdf", 
 				      "",

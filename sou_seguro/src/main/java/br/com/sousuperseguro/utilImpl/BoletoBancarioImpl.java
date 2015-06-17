@@ -46,7 +46,7 @@ public class BoletoBancarioImpl implements BoletoBancario {
 	public BoletoViewer gerarBoleto(RecebidoSouSuperSeguro dadosDoCliente, BigInteger idProposta) {
 		
 		
-		Cedente cedente = new Cedente("OdontoPrev S.A. - CNPJ: 58.119.199/0001-51 - Al. Tocantins, 125 15∫ andar Barueri/SP CEP: 06455-010", "58.119.199/0001-51");
+		Cedente cedente = new Cedente("OdontoPrev S.A. - CNPJ: 58.119.199/0001-51 - Al. Tocantins, 125 15¬∫ andar Barueri/SP CEP: 06455-010", "58.119.199/0001-51");
 		String cpf = dadosDoCliente.getRecebidoSouSuperSeguroPagamentoMensalidade().getCpfTitCorrente();
 		
 		cpf = cpf.replace(" ", "");
@@ -151,19 +151,20 @@ public class BoletoBancarioImpl implements BoletoBancario {
 		
 		Boleto boleto = new Boleto(titulo);
         
-		boleto.setLocalPagamento("Pag·vel preferencialmente na Rede Bradesco ou Bradesco Expresso.");
+		boleto.setLocalPagamento("Pag√°vel preferencialmente na Rede Bradesco ou Bradesco Expresso.");
 
 		
-		boleto.setInstrucao1("ATEN«√O SR. CAIXA: N„o receber se o campo Pagador n„o estiver preenchido");
+		boleto.setInstrucao1("ATEN√á√ÉO SR. CAIXA: N√£o receber se o campo Pagador n√£o estiver preenchido");
 		
 		
-		boleto.setInstrucao8("AP”S o Vencimento, Pag·vel Somente no Banco Bradesco.");
+		boleto.setInstrucao8("AP√ìS o Vencimento, Pag√°vel Somente no Banco Bradesco.");
 		
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
 		boletoViewer.setTemplate("/home/boleto/pagadorBeneficiario.pdf");
 //		/home/boleto/pagadorBeneficiario.pdf
-//		C:/Users/Pc6/pagadorBeneficiario.pdf
+//		C:/Users/escaranello/Documents/pagadorBeneficiario.pdf
 //		C:/pagadorBeneficiario.pdf
+	
 		
 //		File file = new File("C:\\Users\\Erik Scaranello\\Documents\\boleto.pdf"); //Criamos um nome para o arquivo  
 //		BufferedOutputStream bos = null;
